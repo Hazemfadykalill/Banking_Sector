@@ -24,7 +24,7 @@ export const routes: Routes = [
       },
       {
         path: 'accounts',
-        loadComponent: () => import('./features/accounts/accounts-placeholder.component').then(m => m.AccountsPlaceholderComponent)
+        loadComponent: () => import('./features/advanced/advanced.component').then(m => m.AdvancedComponent)
       },
       {
         path: 'transactions',
