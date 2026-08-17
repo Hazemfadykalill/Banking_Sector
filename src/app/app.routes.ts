@@ -1,11 +1,12 @@
 import { Routes } from '@angular/router';
 import { ShellComponent } from './layout/shell/shell.component';
-import { authGuard } from './core/guards/auth.guard';
+import { authGuard, publicGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   {
     path: 'login',
-    loadComponent: () => import('./features/auth/login-placeholder.component').then(m => m.LoginPlaceholderComponent)
+    canActivate: [publicGuard],
+    loadComponent: () => import('./features/auth/login/login.component').then(m => m.LoginComponent)
   },
   {
     path: '',
