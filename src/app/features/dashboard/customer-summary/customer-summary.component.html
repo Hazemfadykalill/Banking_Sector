@@ -1,0 +1,71 @@
+<div class="customer-summary-card">
+  @if (!customer) {
+    <div class="no-selection">
+      <i class="pi pi-user-minus"></i>
+      <p>Select a customer from the directory to inspect details.</p>
+    </div>
+  } @else {
+    <div class="summary-header">
+      <div class="avatar-column">
+        <p-avatar
+          [label]="customer.name.charAt(0)"
+          shape="circle"
+          size="large"
+          styleClass="summary-avatar"
+        ></p-avatar>
+      </div>
+
+      <div class="info-column">
+        <div class="title-row">
+          <h2>{{ customer.name }}</h2>
+          @if (customer.tier) {
+            <p-tag [value]="customer.tier" severity="warn"></p-tag>
+          }
+        </div>
+        <p class="customer-id">Customer Reference: <strong>{{ customer.id }}</strong></p>
+      </div>
+    </div>
+
+    <p-divider styleClass="summary-divider"></p-divider>
+
+    <div class="details-grid">
+      <div class="detail-item">
+        <span class="detail-label"><i class="pi pi-envelope"></i> Email</span>
+        <span class="detail-value">{{ customer.email }}</span>
+      </div>
+
+      @if (customer.phone) {
+        <div class="detail-item">
+          <span class="detail-label"><i class="pi pi-phone"></i> Phone</span>
+          <span class="detail-value">{{ customer.phone }}</span>
+        </div>
+      }
+
+      @if (customer.customerSince) {
+        <div class="detail-item">
+          <span class="detail-label"><i class="pi pi-calendar"></i> Member Since</span>
+          <span class="detail-value">{{ customer.customerSince | date:'mediumDate' }}</span>
+        </div>
+      }
+
+      @if (customer.address) {
+        <div class="detail-item full-width">
+          <span class="detail-label"><i class="pi pi-map-marker"></i> Address</span>
+          <span class="detail-value">{{ customer.address }}</span>
+        </div>
+      }
+    </div>
+
+    <div class="financial-quick-metrics">
+      <div class="metric-card">
+        <span class="metric-title">Associated Accounts</span>
+        <span class="metric-number">{{ accountCount }}</span>
+      </div>
+
+      <div class="metric-card highlight">
+        <span class="metric-title">Total Portfolio Value</span>
+        <span class="metric-number">{{ totalBalance | currency:'USD':'symbol':'1.2-2' }}</span>
+      </div>
+    </div>
+  }
+</div>

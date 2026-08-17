@@ -1,0 +1,68 @@
+<div class="account-list-wrapper">
+  <div class="section-title-row">
+    <div class="title-group">
+      <i class="pi pi-credit-card section-icon"></i>
+      <h3>Accounts Overview</h3>
+    </div>
+    <span class="account-count">{{ accounts.length }} Accounts</span>
+  </div>
+
+  @if (accounts.length === 0) {
+    <div class="empty-accounts">
+      <i class="pi pi-folder-open empty-icon"></i>
+      <p>No banking accounts registered for this customer.</p>
+    </div>
+  } @else {
+    <div class="table-container">
+      <p-table
+        [value]="accounts"
+        [rowHover]="true"
+        dataKey="id"
+        styleClass="p-datatable-sm custom-account-table"
+        [responsiveLayout]="'scroll'"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Account Number</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th class="text-right">Balance</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-acc>
+          <tr [class.selected-row]="acc.id === selectedAccountId">
+            <td>
+              <div class="account-number-cell">
+                <i class="pi pi-wallet account-icon"></i>
+                <strong>{{ acc.accountNumber }}</strong>
+              </div>
+            </td>
+            <td>
+              <p-tag [value]="acc.accountType" [severity]="getAccountTypeSeverity(acc.accountType)"></p-tag>
+            </td>
+            <td>
+              <p-tag [value]="acc.status" [severity]="getStatusSeverity(acc.status)"></p-tag>
+            </td>
+            <td class="text-right">
+              <span class="balance-amount font-semibold" [class.negative]="acc.balance < 0">
+                {{ acc.balance | currency:acc.currency:'symbol':'1.2-2' }}
+              </span>
+            </td>
+            <td class="text-center">
+              <p-button
+                [label]="acc.id === selectedAccountId ? 'Selected' : 'Select'"
+                [icon]="acc.id === selectedAccountId ? 'pi pi-check' : 'pi pi-chevron-right'"
+                [severity]="acc.id === selectedAccountId ? 'success' : 'secondary'"
+                [outlined]="acc.id !== selectedAccountId"
+                size="small"
+                (onClick)="selectAccount(acc.id)"
+              ></p-button>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  }
+</div>
