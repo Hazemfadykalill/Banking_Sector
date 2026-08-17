@@ -1,0 +1,90 @@
+[
+  {
+    "id": "tx-1001",
+    "accountId": "acc-101",
+    "type": "Credit",
+    "amount": 4500.00,
+    "date": "2026-08-01T09:00:00Z",
+    "merchant": "Acme Corp Salary",
+    "category": "Salary",
+    "balanceAfter": 15000.00,
+    "description": "Monthly Payroll Direct Deposit"
+  },
+  {
+    "id": "tx-1002",
+    "accountId": "acc-101",
+    "type": "Debit",
+    "amount": 142.80,
+    "date": "2026-08-03T14:22:00Z",
+    "merchant": "Whole Foods Market",
+    "category": "Groceries",
+    "balanceAfter": 14857.20,
+    "description": "Weekly organic groceries"
+  },
+  {
+    "id": "tx-1003",
+    "accountId": "acc-101",
+    "type": "Debit",
+    "amount": 95.50,
+    "date": "2026-08-05T18:40:00Z",
+    "merchant": "Electric Utility Co",
+    "category": "Utilities",
+    "balanceAfter": 14761.70,
+    "description": "Monthly electricity bill"
+  },
+  {
+    "id": "tx-1004",
+    "accountId": "acc-101",
+    "type": "Debit",
+    "amount": 261.20,
+    "date": "2026-08-10T12:15:00Z",
+    "merchant": "Apple Store",
+    "category": "Shopping",
+    "balanceAfter": 14500.50,
+    "description": "MagSafe charger & accessories"
+  },
+  {
+    "id": "tx-1005",
+    "accountId": "acc-102",
+    "type": "Credit",
+    "amount": 1200.00,
+    "date": "2026-08-02T10:30:00Z",
+    "merchant": "Internal Auto Transfer",
+    "category": "Transfer",
+    "balanceAfter": 48250.75,
+    "description": "Auto savings deposit"
+  },
+  {
+    "id": "tx-1006",
+    "accountId": "acc-103",
+    "type": "Credit",
+    "amount": 3200.00,
+    "date": "2026-08-01T08:30:00Z",
+    "merchant": "TechConsultants Inc",
+    "category": "Salary",
+    "balanceAfter": 8750.00,
+    "description": "Bi-weekly consulting payout"
+  },
+  {
+    "id": "tx-1007",
+    "accountId": "acc-103",
+    "type": "Debit",
+    "amount": 550.00,
+    "date": "2026-08-07T19:00:00Z",
+    "merchant": "The French Bistro",
+    "category": "Dining",
+    "balanceAfter": 8200.00,
+    "description": "Team dinner celebration"
+  },
+  {
+    "id": "tx-1008",
+    "accountId": "acc-105",
+    "type": "Debit",
+    "amount": 89.99,
+    "date": "2026-08-12T11:05:00Z",
+    "merchant": "Steam Games Outlet",
+    "category": "Entertainment",
+    "balanceAfter": 3150.25,
+    "description": "Digital game release"
+  }
+]

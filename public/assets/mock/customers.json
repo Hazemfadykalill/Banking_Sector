@@ -1,0 +1,32 @@
+[
+  {
+    "id": "cust-001",
+    "name": "Sarah Jenkins",
+    "email": "sarah.jenkins@example.com",
+    "phone": "+1 (555) 234-5678",
+    "avatar": "assets/avatars/sarah.jpg",
+    "address": "742 Evergreen Terrace, Springfield, IL",
+    "customerSince": "2021-03-15",
+    "tier": "Premium VIP"
+  },
+  {
+    "id": "cust-002",
+    "name": "Marcus Vance",
+    "email": "marcus.vance@example.com",
+    "phone": "+1 (555) 876-5432",
+    "avatar": "assets/avatars/marcus.jpg",
+    "address": "100 Innovation Way, Austin, TX",
+    "customerSince": "2019-11-02",
+    "tier": "Platinum"
+  },
+  {
+    "id": "cust-003",
+    "name": "Elena Rostova",
+    "email": "elena.rostova@example.com",
+    "phone": "+1 (555) 432-1098",
+    "avatar": "assets/avatars/elena.jpg",
+    "address": "45 Wall Street, New York, NY",
+    "customerSince": "2022-07-20",
+    "tier": "Standard"
+  }
+]

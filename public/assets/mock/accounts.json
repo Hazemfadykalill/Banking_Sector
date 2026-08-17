@@ -1,0 +1,52 @@
+[
+  {
+    "id": "acc-101",
+    "customerId": "cust-001",
+    "accountNumber": "CHK-88392014",
+    "accountType": "Checking",
+    "balance": 14500.50,
+    "currency": "USD",
+    "status": "Active",
+    "createdAt": "2021-03-15T10:00:00Z"
+  },
+  {
+    "id": "acc-102",
+    "customerId": "cust-001",
+    "accountNumber": "SAV-99201847",
+    "accountType": "Savings",
+    "balance": 48250.75,
+    "currency": "USD",
+    "status": "Active",
+    "createdAt": "2021-04-01T14:30:00Z"
+  },
+  {
+    "id": "acc-103",
+    "customerId": "cust-002",
+    "accountNumber": "CHK-33104928",
+    "accountType": "Checking",
+    "balance": 8200.00,
+    "currency": "USD",
+    "status": "Active",
+    "createdAt": "2019-11-02T09:15:00Z"
+  },
+  {
+    "id": "acc-104",
+    "customerId": "cust-002",
+    "accountNumber": "INV-77301944",
+    "accountType": "Investment",
+    "balance": 125000.00,
+    "currency": "USD",
+    "status": "Active",
+    "createdAt": "2020-01-10T11:00:00Z"
+  },
+  {
+    "id": "acc-105",
+    "customerId": "cust-003",
+    "accountNumber": "CHK-55492011",
+    "accountType": "Checking",
+    "balance": 3150.25,
+    "currency": "USD",
+    "status": "Active",
+    "createdAt": "2022-07-20T16:45:00Z"
+  }
+]
