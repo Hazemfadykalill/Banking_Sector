@@ -28,7 +28,7 @@ export const routes: Routes = [
       },
       {
         path: 'transactions',
-        loadComponent: () => import('./features/transactions/transactions-placeholder.component').then(m => m.TransactionsPlaceholderComponent)
+        loadComponent: () => import('./features/transactions/transactions.component').then(m => m.TransactionsComponent)
       }
     ]
   },
