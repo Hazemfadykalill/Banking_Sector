@@ -1,0 +1,45 @@
+<div class="mini-statement-card">
+  <div class="card-header">
+    <div class="title-group">
+      <i class="pi pi-history header-icon"></i>
+      <h3>Mini Statement</h3>
+    </div>
+    @if (selectedAccount) {
+      <span class="acc-badge">{{ selectedAccount.accountNumber }}</span>
+    }
+  </div>
+
+  @if (!selectedAccount) {
+    <div class="empty-state">
+      <i class="pi pi-wallet"></i>
+      <p>No account selected. Select an account to view mini statement.</p>
+    </div>
+  } @else if (recentTransactions.length === 0) {
+    <div class="empty-state">
+      <i class="pi pi-inbox"></i>
+      <p>No recent transactions recorded for this account.</p>
+    </div>
+  } @else {
+    <div class="recent-tx-list">
+      @for (tx of recentTransactions; track tx.id) {
+        <div class="tx-row">
+          <div class="tx-left">
+            <div class="type-icon-box" [class.credit]="tx.type === 'Credit'" [class.debit]="tx.type === 'Debit'">
+              <i [class]="tx.type === 'Credit' ? 'pi pi-arrow-down-left' : 'pi pi-arrow-up-right'"></i>
+            </div>
+            <div class="tx-meta">
+              <strong class="merchant-title">{{ tx.merchant }}</strong>
+              <span class="tx-date-cat">{{ tx.date | date:'shortDate' }} • {{ tx.category }}</span>
+            </div>
+          </div>
+
+          <div class="tx-right">
+            <span class="tx-amount" [class.credit-text]="tx.type === 'Credit'" [class.debit-text]="tx.type === 'Debit'">
+              {{ tx.type === 'Credit' ? '+' : '-' }}{{ tx.amount | currency:'USD':'symbol':'1.2-2' }}
+            </span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>
