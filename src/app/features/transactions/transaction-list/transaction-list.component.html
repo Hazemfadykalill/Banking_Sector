@@ -1,0 +1,87 @@
+<div class="transaction-list-card">
+  <div class="table-header-row">
+    <h3>Transaction Ledger</h3>
+    <span class="count-chip">{{ transactions.length }} Records</span>
+  </div>
+
+  @if (transactions.length === 0) {
+    <div class="empty-state-container">
+      @if (isFiltered) {
+        <i class="pi pi-filter-slash empty-icon"></i>
+        <h4>No Matching Transactions</h4>
+        <p>No transaction records match the active filter criteria. Try adjusting or clearing your filters.</p>
+      } @else {
+        <i class="pi pi-receipt empty-icon"></i>
+        <h4>No Account Transactions</h4>
+        <p>There are no recorded transactions for this selected banking account yet.</p>
+      }
+    </div>
+  } @else {
+    <div class="table-responsive-wrapper">
+      <p-table
+        [value]="transactions"
+        [paginator]="true"
+        [rows]="rowsPerPage"
+        [rowsPerPageOptions]="[5, 10, 20, 50]"
+        [showCurrentPageReport]="true"
+        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} transactions"
+        styleClass="p-datatable-striped p-datatable-sm custom-tx-table"
+        dataKey="id"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Date</th>
+            <th>Merchant / Description</th>
+            <th>Category</th>
+            <th>Type</th>
+            <th class="text-right">Amount</th>
+            <th class="text-right">Post Balance</th>
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-tx>
+          <tr>
+            <td>
+              <div class="date-cell">
+                <i class="pi pi-calendar-times date-icon"></i>
+                <span>{{ tx.date | date:'mediumDate' }}</span>
+              </div>
+            </td>
+            <td>
+              <div class="merchant-cell">
+                <strong class="merchant-name">{{ tx.merchant }}</strong>
+                @if (tx.description) {
+                  <span class="tx-description">{{ tx.description }}</span>
+                }
+              </div>
+            </td>
+            <td>
+              <p-tag [value]="tx.category" [severity]="getCategorySeverity(tx.category)"></p-tag>
+            </td>
+            <td>
+              <p-tag
+                [value]="tx.type"
+                [severity]="getTypeSeverity(tx.type)"
+                [icon]="tx.type === 'Credit' ? 'pi pi-arrow-down-left' : 'pi pi-arrow-up-right'"
+              ></p-tag>
+            </td>
+            <td class="text-right">
+              <span
+                class="amount-display font-semibold"
+                [class.credit-text]="tx.type === 'Credit'"
+                [class.debit-text]="tx.type === 'Debit'"
+              >
+                {{ tx.type === 'Credit' ? '+' : '-' }}{{ tx.amount | currency:'USD':'symbol':'1.2-2' }}
+              </span>
+            </td>
+            <td class="text-right">
+              <span class="balance-after-text">
+                {{ tx.balanceAfter | currency:'USD':'symbol':'1.2-2' }}
+              </span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  }
+</div>

@@ -1,0 +1,179 @@
+<p-dialog
+  [header]="'Create New Transaction'"
+  [(visible)]="visible"
+  [modal]="true"
+  [style]="{ width: '90%', maxWidth: '540px' }"
+  [draggable]="false"
+  [resizable]="false"
+  (onHide)="onClose()"
+>
+  <div class="dialog-body">
+    <!-- Target Account Context Header -->
+    @if (selectedAccount) {
+      <div class="target-account-badge">
+        <div class="acc-info">
+          <i class="pi pi-wallet"></i>
+          <div>
+            <strong>{{ selectedAccount.accountNumber }}</strong> ({{ selectedAccount.accountType }})
+          </div>
+        </div>
+        <div class="acc-balance">
+          Balance: <strong>{{ selectedAccount.balance | currency:selectedAccount.currency:'symbol':'1.2-2' }}</strong>
+        </div>
+      </div>
+    }
+
+    @if (submitError) {
+      <p-message severity="error" [text]="submitError" styleClass="mb-3 w-full"></p-message>
+    }
+
+    @if (submitSuccess) {
+      <p-message severity="success" [text]="submitSuccess" styleClass="mb-3 w-full"></p-message>
+    }
+
+    <form [formGroup]="txForm" (ngSubmit)="onSubmit()" class="tx-form">
+      <!-- Transaction Type -->
+      <div class="form-field">
+        <label for="type">Transaction Type <span class="required">*</span></label>
+        <p-select
+          id="type"
+          formControlName="type"
+          [options]="typeOptions"
+          optionLabel="label"
+          optionValue="value"
+          styleClass="w-full"
+        ></p-select>
+        @if (txForm.get('type')?.touched && txForm.get('type')?.errors?.['required']) {
+          <small class="error-text">Transaction type is required.</small>
+        }
+      </div>
+
+      <!-- Amount -->
+      <div class="form-field">
+        <label for="amount">Amount ($) <span class="required">*</span></label>
+        <p-inputNumber
+          id="amount"
+          formControlName="amount"
+          mode="decimal"
+          [minFractionDigits]="2"
+          [maxFractionDigits]="2"
+          [min]="0.01"
+          [max]="100000"
+          placeholder="0.00"
+          styleClass="w-full"
+        ></p-inputNumber>
+        @if (txForm.get('amount')?.touched) {
+          @if (txForm.get('amount')?.errors?.['required']) {
+            <small class="error-text">Amount is required.</small>
+          } @else if (txForm.get('amount')?.errors?.['min']) {
+            <small class="error-text">Amount must be greater than $0.00.</small>
+          } @else if (txForm.get('amount')?.errors?.['max']) {
+            <small class="error-text">Amount cannot exceed $100,000.00.</small>
+          } @else if (txForm.get('amount')?.errors?.['maxDecimals']) {
+            <small class="error-text">Maximum 2 decimal places allowed.</small>
+          }
+        }
+      </div>
+
+      <!-- Date -->
+      <div class="form-field">
+        <label for="date">Transaction Date <span class="required">*</span></label>
+        <p-datePicker
+          id="date"
+          formControlName="date"
+          dateFormat="yy-mm-dd"
+          [showIcon]="true"
+          placeholder="Select date"
+          styleClass="w-full"
+        ></p-datePicker>
+        @if (txForm.get('date')?.touched) {
+          @if (txForm.get('date')?.errors?.['required']) {
+            <small class="error-text">Transaction date is required.</small>
+          } @else if (txForm.get('date')?.errors?.['futureDate']) {
+            <small class="error-text">Transaction date cannot be in the future.</small>
+          }
+        }
+      </div>
+
+      <!-- Merchant -->
+      <div class="form-field">
+        <label for="merchant">Merchant / Payee <span class="required">*</span></label>
+        <input
+          id="merchant"
+          type="text"
+          pInputText
+          formControlName="merchant"
+          placeholder="e.g. Whole Foods Market"
+          class="w-full"
+        />
+        @if (txForm.get('merchant')?.touched) {
+          @if (txForm.get('merchant')?.errors?.['required'] || txForm.get('merchant')?.errors?.['whitespace']) {
+            <small class="error-text">Merchant name is required (no empty spaces).</small>
+          } @else if (txForm.get('merchant')?.errors?.['minlength']) {
+            <small class="error-text">Merchant must be at least 3 characters.</small>
+          } @else if (txForm.get('merchant')?.errors?.['maxlength']) {
+            <small class="error-text">Merchant cannot exceed 50 characters.</small>
+          }
+        }
+      </div>
+
+      <!-- Category -->
+      <div class="form-field">
+        <label for="category">Category <span class="required">*</span></label>
+        <p-select
+          id="category"
+          formControlName="category"
+          [options]="categoryOptions"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select Category"
+          styleClass="w-full"
+        ></p-select>
+        @if (txForm.get('category')?.touched && txForm.get('category')?.errors?.['required']) {
+          <small class="error-text">Category is required.</small>
+        }
+      </div>
+
+      <!-- Description (Optional) -->
+      <div class="form-field">
+        <label for="description">Description (Optional)</label>
+        <textarea
+          id="description"
+          pTextarea
+          formControlName="description"
+          rows="2"
+          placeholder="Optional notes..."
+          class="w-full"
+        ></textarea>
+        @if (txForm.get('description')?.touched && txForm.get('description')?.errors?.['maxlength']) {
+          <small class="error-text">Description cannot exceed 200 characters.</small>
+        }
+      </div>
+
+      <!-- Cross-field Debit validation warning -->
+      @if (txForm.touched && txForm.errors?.['debitExceedsBalance']; as err) {
+        <div class="form-business-error">
+          <i class="pi pi-exclamation-triangle"></i>
+          <span>Debit amount (${{ err.amount | number:'1.2-2' }}) exceeds available account balance (${{ err.balance | number:'1.2-2' }}).</span>
+        </div>
+      }
+
+      <div class="dialog-actions">
+        <p-button
+          label="Cancel"
+          severity="secondary"
+          [outlined]="true"
+          (onClick)="onClose()"
+          type="button"
+        ></p-button>
+        <p-button
+          label="Submit Transaction"
+          icon="pi pi-check"
+          type="submit"
+          [loading]="isSubmitting"
+          [disabled]="isSubmitting"
+        ></p-button>
+      </div>
+    </form>
+  </div>
+</p-dialog>

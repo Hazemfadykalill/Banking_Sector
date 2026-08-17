@@ -1,0 +1,105 @@
+<div class="filters-container">
+  <div class="filters-header">
+    <div class="header-title">
+      <i class="pi pi-filter"></i>
+      <h4>Transaction Filters</h4>
+    </div>
+    <p-button
+      label="Clear Filters"
+      icon="pi pi-filter-slash"
+      severity="secondary"
+      [text]="true"
+      size="small"
+      (onClick)="resetFilters()"
+    ></p-button>
+  </div>
+
+  <div class="filters-grid">
+    <!-- Date Range Picker -->
+    <div class="filter-field">
+      <label for="startDate">From Date</label>
+      <p-datePicker
+        id="startDate"
+        [(ngModel)]="startDate"
+        placeholder="Start Date"
+        dateFormat="yy-mm-dd"
+        [showIcon]="true"
+        (onSelect)="onFilterUpdate()"
+        (onClear)="onFilterUpdate()"
+      ></p-datePicker>
+    </div>
+
+    <div class="filter-field">
+      <label for="endDate">To Date</label>
+      <p-datePicker
+        id="endDate"
+        [(ngModel)]="endDate"
+        placeholder="End Date"
+        dateFormat="yy-mm-dd"
+        [showIcon]="true"
+        (onSelect)="onFilterUpdate()"
+        (onClear)="onFilterUpdate()"
+      ></p-datePicker>
+    </div>
+
+    <!-- Type Selector -->
+    <div class="filter-field">
+      <label for="typeFilter">Type</label>
+      <p-select
+        id="typeFilter"
+        [options]="typeOptions"
+        [(ngModel)]="selectedType"
+        optionLabel="label"
+        optionValue="value"
+        (onChange)="onFilterUpdate()"
+      ></p-select>
+    </div>
+
+    <!-- Category Selector -->
+    <div class="filter-field">
+      <label for="categoryFilter">Category</label>
+      <p-select
+        id="categoryFilter"
+        [options]="categoryOptions"
+        [(ngModel)]="selectedCategory"
+        optionLabel="label"
+        optionValue="value"
+        (onChange)="onFilterUpdate()"
+      ></p-select>
+    </div>
+
+    <!-- Sort Selector -->
+    <div class="filter-field">
+      <label for="sortFilter">Sort By</label>
+      <p-select
+        id="sortFilter"
+        [options]="[
+          { label: 'Date (Newest First)', value: 'date-desc' },
+          { label: 'Date (Oldest First)', value: 'date-asc' },
+          { label: 'Amount (Highest First)', value: 'amount-desc' },
+          { label: 'Amount (Lowest First)', value: 'amount-asc' }
+        ]"
+        [(ngModel)]="selectedSortKey"
+        optionLabel="label"
+        optionValue="value"
+        (onChange)="onSortChange($event)"
+      ></p-select>
+    </div>
+
+    <!-- Search Input -->
+    <div class="filter-field search-field">
+      <label for="merchantSearch">Search Merchant</label>
+      <div class="search-input-wrapper">
+        <i class="pi pi-search search-icon"></i>
+        <input
+          id="merchantSearch"
+          type="text"
+          pInputText
+          [(ngModel)]="searchQuery"
+          placeholder="Search merchant or description..."
+          (input)="onFilterUpdate()"
+        />
+      </div>
+    </div>
+  </div>
+</div>
