@@ -1,0 +1,56 @@
+<header class="app-header">
+  <div class="header-container">
+    <div class="header-brand">
+      <a routerLink="/dashboard" class="brand-link">
+        <div class="brand-icon">
+          <i class="pi pi-building-columns"></i>
+        </div>
+        <div class="brand-text">
+          <span class="brand-name">APEX</span>
+          <span class="brand-tag">BANKING PORTAL</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="header-actions">
+      @if (facade.selectedCustomer(); as customer) {
+        <div class="customer-badge">
+          <span class="badge-label">Active Portal User:</span>
+          <strong class="customer-name">{{ customer.name }}</strong>
+          @if (customer.tier) {
+            <p-tag [value]="customer.tier" severity="warn"></p-tag>
+          }
+        </div>
+      }
+
+      <p-button
+        [icon]="isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'"
+        [rounded]="true"
+        [text]="true"
+        [ariaLabel]="'Toggle Dark Mode'"
+        (onClick)="toggleDarkMode()"
+      ></p-button>
+
+      @if (authService.session(); as session) {
+        <div class="user-profile">
+          <p-avatar
+            [label]="session.customer.name.charAt(0)"
+            shape="circle"
+            styleClass="profile-avatar"
+          ></p-avatar>
+          <div class="profile-info">
+            <span class="user-email">{{ session.customer.email }}</span>
+          </div>
+          <p-button
+            icon="pi pi-sign-out"
+            label="Logout"
+            severity="secondary"
+            [outlined]="true"
+            size="small"
+            (onClick)="authService.logout()"
+          ></p-button>
+        </div>
+      }
+    </div>
+  </div>
+</header>
