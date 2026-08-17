@@ -6,7 +6,7 @@ import { DatePickerModule } from 'primeng/datepicker';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { TransactionCategory, TransactionType, TransactionFilter } from '../../../core/models';
+import { TransactionCategory, TransactionType, TransactionFilter, TransactionTypeKind } from '../../../core/models';
 
 @Component({
   selector: 'app-transaction-filters',
@@ -69,7 +69,7 @@ export class TransactionFiltersComponent implements OnInit {
     const filter: TransactionFilter = {
       startDate: this.startDate,
       endDate: this.endDate,
-      type: this.selectedType as any,
+      type: this.selectedType as TransactionTypeKind | 'ALL',
       category: this.selectedCategory,
       searchQuery: this.searchQuery.trim(),
       sortBy: this.sortBy,
@@ -78,7 +78,7 @@ export class TransactionFiltersComponent implements OnInit {
     this.filterChange.emit(filter);
   }
 
-  onSortChange(event: any): void {
+  onSortChange(event: { value: string }): void {
     const val = event.value;
     if (val === 'date-desc') {
       this.sortBy = 'date';
