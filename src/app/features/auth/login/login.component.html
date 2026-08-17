@@ -1,0 +1,115 @@
+<div class="login-page">
+  <div class="login-card-container">
+    <p-card styleClass="auth-card">
+      <ng-template pTemplate="header">
+        <div class="card-header-brand">
+          <div class="brand-badge">
+            <i class="pi pi-building-columns"></i>
+          </div>
+          <h1>APEX BANKING</h1>
+          <p class="brand-subtitle">Enterprise Customer Portal</p>
+        </div>
+      </ng-template>
+
+      @if (errorMessage(); as err) {
+        <div class="message-wrapper">
+          <p-message severity="error" [text]="err"></p-message>
+        </div>
+      }
+
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="login-form">
+        <div class="form-field">
+          <label for="email" class="field-label">Email Address</label>
+          <div class="p-input-icon-left w-full">
+            <i class="pi pi-envelope"></i>
+            <input
+              id="email"
+              type="email"
+              pInputText
+              formControlName="email"
+              placeholder="e.g. sarah.jenkins@example.com"
+              class="w-full"
+              [class.ng-invalid]="emailControl.invalid && (emailControl.touched || emailControl.dirty)"
+              [class.ng-dirty]="emailControl.dirty"
+              autocomplete="username"
+              aria-describedby="email-error"
+            />
+          </div>
+
+          @if (emailControl.invalid && (emailControl.touched || emailControl.dirty)) {
+            <small id="email-error" class="error-text">
+              @if (emailControl.errors?.['required'] || emailControl.errors?.['whitespace']) {
+                Email is required.
+              } @else if (emailControl.errors?.['email']) {
+                Please enter a valid email address.
+              }
+            </small>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="password" class="field-label">Password</label>
+          <p-password
+            id="password"
+            formControlName="password"
+            [toggleMask]="true"
+            [feedback]="false"
+            placeholder="Enter password"
+            styleClass="w-full"
+            inputStyleClass="w-full"
+            autocomplete="current-password"
+            aria-describedby="password-error"
+          ></p-password>
+
+          @if (passwordControl.invalid && (passwordControl.touched || passwordControl.dirty)) {
+            <small id="password-error" class="error-text">
+              Password is required.
+            </small>
+          }
+        </div>
+
+        <div class="form-actions">
+          <p-button
+            type="submit"
+            label="Sign In to Portal"
+            icon="pi pi-sign-in"
+            [loading]="isLoading()"
+            [disabled]="isLoading()"
+            styleClass="w-full submit-button"
+          ></p-button>
+        </div>
+      </form>
+
+      <p-divider align="center" styleClass="demo-divider">
+        <span class="divider-text">DEMO ACCOUNTS</span>
+      </p-divider>
+
+      <div class="demo-accounts-section">
+        <p class="demo-hint">Click a demo customer below to auto-fill credentials:</p>
+        <div class="demo-buttons">
+          <p-button
+            label="Sarah Jenkins (VIP)"
+            icon="pi pi-user"
+            size="small"
+            severity="secondary"
+            [outlined]="true"
+            (onClick)="fillDemoUser('sarah.jenkins@example.com')"
+          ></p-button>
+          <p-button
+            label="Marcus Vance (Platinum)"
+            icon="pi pi-user"
+            size="small"
+            severity="secondary"
+            [outlined]="true"
+            (onClick)="fillDemoUser('marcus.vance@example.com')"
+          ></p-button>
+        </div>
+      </div>
+    </p-card>
+
+    <div class="login-footer-notice">
+      <i class="pi pi-shield"></i>
+      <span>Protected by 256-bit Enterprise Encryption (Mock Demo Mode)</span>
+    </div>
+  </div>
+</div>
