@@ -1,26 +1,26 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 export interface NavItem {
-  label: string;
+  key: string;
   icon: string;
   route: string;
-  badge?: string;
 }
 
 @Component({
   selector: 'app-navigation',
   standalone: true,
-  imports: [CommonModule, RouterLink, RouterLinkActive],
+  imports: [CommonModule, RouterLink, RouterLinkActive, TranslatePipe],
   templateUrl: './navigation.component.html',
   styleUrls: ['./navigation.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavigationComponent {
   readonly navItems: NavItem[] = [
-    { label: 'Overview Dashboard', icon: 'pi pi-chart-bar', route: '/dashboard' },
-    { label: 'Customer Accounts', icon: 'pi pi-wallet', route: '/accounts' },
-    { label: 'Transaction History', icon: 'pi pi-list', route: '/transactions' }
+    { key: 'nav.dashboard', icon: 'pi pi-chart-bar', route: '/dashboard' },
+    { key: 'nav.accounts', icon: 'pi pi-wallet', route: '/accounts' },
+    { key: 'nav.transactions', icon: 'pi pi-list', route: '/transactions' }
   ];
 }

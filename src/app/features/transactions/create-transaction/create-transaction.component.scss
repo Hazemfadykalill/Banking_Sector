@@ -1,6 +1,6 @@
 .target-account-badge {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--surface-ground, #f8fafc);
+  border: 1px solid var(--surface-border, #e2e8f0);
   border-radius: 10px;
   padding: 0.85rem 1rem;
   margin-bottom: 1.25rem;
@@ -13,7 +13,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #0f172a;
+    color: var(--text-color, #0f172a);
 
     i {
       color: #2563eb;
@@ -21,9 +21,9 @@
   }
 
   .acc-balance {
-    color: #64748b;
+    color: var(--text-secondary, #64748b);
     strong {
-      color: #1e293b;
+      color: var(--text-color, #1e293b);
     }
   }
 }
@@ -42,7 +42,7 @@
   label {
     font-size: 0.82rem;
     font-weight: 600;
-    color: #334155;
+    color: var(--text-color, #334155);
 
     .required {
       color: #ef4444;
@@ -57,9 +57,9 @@
 }
 
 .form-business-error {
-  background: #fef2f2;
-  border: 1px solid #fecaca;
-  color: #991b1b;
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #ef4444;
   border-radius: 8px;
   padding: 0.75rem 1rem;
   display: flex;
@@ -79,7 +79,7 @@
   gap: 0.75rem;
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid var(--surface-border, #e2e8f0);
 }
 
 .w-full {

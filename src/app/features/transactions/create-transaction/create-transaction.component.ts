@@ -20,6 +20,8 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { Account, Transaction, TransactionCategory, TransactionType } from '../../../core/models';
 import { BankingFacadeService } from '../../../core/services/banking-facade.service';
+import { LanguageService } from '../../../core/services/language.service';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { noWhitespaceValidator } from '../../../shared/validators/no-whitespace.validator';
 import { maxDecimalsValidator, pastOrTodayDateValidator, debitBalanceValidator } from '../../../shared/validators/custom-validators';
 
@@ -36,7 +38,8 @@ import { maxDecimalsValidator, pastOrTodayDateValidator, debitBalanceValidator }
     InputTextModule,
     TextareaModule,
     ButtonModule,
-    MessageModule
+    MessageModule,
+    TranslatePipe
   ],
   templateUrl: './create-transaction.component.html',
   styleUrls: ['./create-transaction.component.scss'],
@@ -45,6 +48,7 @@ import { maxDecimalsValidator, pastOrTodayDateValidator, debitBalanceValidator }
 export class CreateTransactionComponent implements OnChanges {
   private readonly fb = inject(FormBuilder);
   private readonly facade = inject(BankingFacadeService);
+  readonly langService = inject(LanguageService);
 
   @Input() categories: TransactionCategory[] = [];
   @Input() types: TransactionType[] = [];
@@ -95,13 +99,16 @@ export class CreateTransactionComponent implements OnChanges {
   }
 
   get categoryOptions() {
-    return this.categories.map(c => ({ label: c.name, value: c.name }));
+    return this.categories.map(c => ({
+      label: this.langService.translate(`cat.${c.name}`),
+      value: c.name
+    }));
   }
 
   get typeOptions() {
     return [
-      { label: 'Debit', value: 'Debit' },
-      { label: 'Credit', value: 'Credit' }
+      { label: this.langService.translate('type.Debit'), value: 'Debit' },
+      { label: this.langService.translate('type.Credit'), value: 'Credit' }
     ];
   }
 
@@ -119,8 +126,7 @@ export class CreateTransactionComponent implements OnChanges {
     if (this.txForm.invalid) {
       this.txForm.markAllAsTouched();
       if (this.txForm.errors?.['debitExceedsBalance']) {
-        const err = this.txForm.errors['debitExceedsBalance'];
-        this.submitError = `Debit amount ($${err.amount.toFixed(2)}) exceeds current account balance ($${err.balance.toFixed(2)}).`;
+        this.submitError = this.langService.translate('createTx.debitExceeds');
       }
       return;
     }
@@ -150,10 +156,9 @@ export class CreateTransactionComponent implements OnChanges {
     this.isSubmitting = false;
 
     if (res.success && res.transaction) {
-      this.submitSuccess = 'Transaction recorded successfully!';
+      this.submitSuccess = this.langService.translate('createTx.success');
       this.transactionCreated.emit(res.transaction);
-      
-      // Reset form but retain defaults
+
       this.txForm.reset({
         type: 'Debit',
         amount: null,
@@ -163,7 +168,6 @@ export class CreateTransactionComponent implements OnChanges {
         description: ''
       });
 
-      // Auto close after brief display
       setTimeout(() => {
         this.onClose();
       }, 1000);

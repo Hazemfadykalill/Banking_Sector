@@ -12,6 +12,7 @@ import { TransactionFilter, Transaction } from '../../core/models';
 import { TransactionFiltersComponent } from './transaction-filters/transaction-filters.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { CreateTransactionComponent } from './create-transaction/create-transaction.component';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-transactions',
@@ -27,7 +28,8 @@ import { CreateTransactionComponent } from './create-transaction/create-transact
     TagModule,
     TransactionFiltersComponent,
     TransactionListComponent,
-    CreateTransactionComponent
+    CreateTransactionComponent,
+    TranslatePipe
   ],
   templateUrl: './transactions.component.html',
   styleUrls: ['./transactions.component.scss'],
@@ -135,7 +137,6 @@ export class TransactionsComponent implements OnInit {
   }
 
   onTransactionCreated(newTx: Transaction): void {
-    // Keep current account context intact and close modal
     this.closeCreateModal();
   }
 }

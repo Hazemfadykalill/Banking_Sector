@@ -1,13 +1,30 @@
 <div class="login-page">
   <div class="login-card-container">
+    <div class="login-top-bar">
+      <p-button
+        [label]="'app.toggleLang' | translate"
+        [rounded]="true"
+        [text]="true"
+        size="small"
+        (onClick)="langService.toggleLanguage()"
+        styleClass="lang-btn"
+      ></p-button>
+      <p-button
+        [icon]="themeService.isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'"
+        [rounded]="true"
+        [text]="true"
+        (onClick)="themeService.toggleTheme()"
+      ></p-button>
+    </div>
+
     <p-card styleClass="auth-card">
       <ng-template pTemplate="header">
         <div class="card-header-brand">
           <div class="brand-badge">
             <i class="pi pi-building-columns"></i>
           </div>
-          <h1>APEX BANKING</h1>
-          <p class="brand-subtitle">Enterprise Customer Portal</p>
+          <h1>{{ 'login.title' | translate }}</h1>
+          <p class="brand-subtitle">{{ 'login.subtitle' | translate }}</p>
         </div>
       </ng-template>
 
@@ -19,7 +36,7 @@
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" novalidate class="login-form">
         <div class="form-field">
-          <label for="email" class="field-label">Email Address</label>
+          <label for="email" class="field-label">{{ 'login.emailLabel' | translate }}</label>
           <div class="p-input-icon-left w-full">
             <i class="pi pi-envelope"></i>
             <input
@@ -27,7 +44,7 @@
               type="email"
               pInputText
               formControlName="email"
-              placeholder="e.g. sarah.jenkins@example.com"
+              [placeholder]="'login.emailPlaceholder' | translate"
               class="w-full"
               [class.ng-invalid]="emailControl.invalid && (emailControl.touched || emailControl.dirty)"
               [class.ng-dirty]="emailControl.dirty"
@@ -39,22 +56,22 @@
           @if (emailControl.invalid && (emailControl.touched || emailControl.dirty)) {
             <small id="email-error" class="error-text">
               @if (emailControl.errors?.['required'] || emailControl.errors?.['whitespace']) {
-                Email is required.
+                {{ 'login.emailRequired' | translate }}
               } @else if (emailControl.errors?.['email']) {
-                Please enter a valid email address.
+                {{ 'login.emailValid' | translate }}
               }
             </small>
           }
         </div>
 
         <div class="form-field">
-          <label for="password" class="field-label">Password</label>
+          <label for="password" class="field-label">{{ 'login.passwordLabel' | translate }}</label>
           <p-password
             id="password"
             formControlName="password"
             [toggleMask]="true"
             [feedback]="false"
-            placeholder="Enter password"
+            [placeholder]="'login.passwordPlaceholder' | translate"
             styleClass="w-full"
             inputStyleClass="w-full"
             autocomplete="current-password"
@@ -63,7 +80,7 @@
 
           @if (passwordControl.invalid && (passwordControl.touched || passwordControl.dirty)) {
             <small id="password-error" class="error-text">
-              Password is required.
+              {{ 'login.passwordRequired' | translate }}
             </small>
           }
         </div>
@@ -71,7 +88,7 @@
         <div class="form-actions">
           <p-button
             type="submit"
-            label="Sign In to Portal"
+            [label]="'login.signIn' | translate"
             icon="pi pi-sign-in"
             [loading]="isLoading()"
             [disabled]="isLoading()"
@@ -81,14 +98,14 @@
       </form>
 
       <p-divider align="center" styleClass="demo-divider">
-        <span class="divider-text">DEMO ACCOUNTS</span>
+        <span class="divider-text">{{ 'login.demoHeader' | translate }}</span>
       </p-divider>
 
       <div class="demo-accounts-section">
-        <p class="demo-hint">Click a demo customer below to auto-fill credentials:</p>
+        <p class="demo-hint">{{ 'login.demoHint' | translate }}</p>
         <div class="demo-buttons">
           <p-button
-            label="Ahmed Ali (Retail)"
+            [label]="'login.demoUser1' | translate"
             icon="pi pi-user"
             size="small"
             severity="secondary"
@@ -96,7 +113,7 @@
             (onClick)="fillDemoUser('ahmed.ali@mail.com')"
           ></p-button>
           <p-button
-            label="Mona Hassan (Priority)"
+            [label]="'login.demoUser2' | translate"
             icon="pi pi-user"
             size="small"
             severity="secondary"
@@ -109,7 +126,7 @@
 
     <div class="login-footer-notice">
       <i class="pi pi-shield"></i>
-      <span>Protected by 256-bit Enterprise Encryption (Mock Demo Mode)</span>
+      <span>{{ 'login.footerNotice' | translate }}</span>
     </div>
   </div>
 </div>

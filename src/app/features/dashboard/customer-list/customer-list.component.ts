@@ -4,11 +4,12 @@ import { CardModule } from 'primeng/card';
 import { AvatarModule } from 'primeng/avatar';
 import { TagModule } from 'primeng/tag';
 import { Customer } from '../../../core/models';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-customer-list',
   standalone: true,
-  imports: [CommonModule, CardModule, AvatarModule, TagModule],
+  imports: [CommonModule, CardModule, AvatarModule, TagModule, TranslatePipe],
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

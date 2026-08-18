@@ -1,6 +1,6 @@
 .filters-container {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--surface-border, #e2e8f0);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -16,7 +16,7 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #0f172a;
+    color: var(--text-color, #0f172a);
 
     i {
       font-size: 1.1rem;
@@ -33,7 +33,7 @@
 
 .filters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
   gap: 1rem;
 }
 
@@ -45,7 +45,7 @@
   label {
     font-size: 0.78rem;
     font-weight: 600;
-    color: #475569;
+    color: var(--text-secondary, #475569);
   }
 
   :host ::ng-deep .p-select,
@@ -69,7 +69,7 @@
 
   .search-icon {
     position: absolute;
-    left: 0.75rem;
+    inset-inline-start: 0.75rem;
     color: #94a3b8;
     font-size: 0.9rem;
     pointer-events: none;
@@ -77,6 +77,6 @@
 
   input {
     width: 100%;
-    padding-left: 2.25rem;
+    padding-inline-start: 2.25rem;
   }
 }

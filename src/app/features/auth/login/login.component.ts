@@ -9,6 +9,9 @@ import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
 import { DividerModule } from 'primeng/divider';
 import { AuthService } from '../../../core/services/auth.service';
+import { ThemeService } from '../../../core/services/theme.service';
+import { LanguageService } from '../../../core/services/language.service';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 import { noWhitespaceValidator } from '../../../shared/validators/no-whitespace.validator';
 
 @Component({
@@ -22,7 +25,8 @@ import { noWhitespaceValidator } from '../../../shared/validators/no-whitespace.
     PasswordModule,
     ButtonModule,
     MessageModule,
-    DividerModule
+    DividerModule,
+    TranslatePipe
   ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
@@ -33,6 +37,8 @@ export class LoginComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
   private readonly route = inject(ActivatedRoute);
+  readonly themeService = inject(ThemeService);
+  readonly langService = inject(LanguageService);
 
   readonly isLoading = signal<boolean>(false);
   readonly errorMessage = signal<string | null>(null);
@@ -61,7 +67,6 @@ export class LoginComponent {
 
     const { email, password } = this.loginForm.getRawValue();
 
-    // Brief async turnaround for loading state demonstration
     setTimeout(() => {
       const result = this.authService.login({ email, password });
 
@@ -75,9 +80,6 @@ export class LoginComponent {
     }, 400);
   }
 
-  /**
-   * Helper method for reviewers to quickly auto-fill demo accounts.
-   */
   fillDemoUser(email: string): void {
     this.loginForm.patchValue({
       email,
