@@ -1,10 +1,12 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { CustomerSummaryComponent } from './customer-summary.component';
 import { Customer } from '../../../core/models';
+import { LanguageService } from '../../../core/services/language.service';
 
 describe('CustomerSummaryComponent', () => {
   let component: CustomerSummaryComponent;
   let fixture: ComponentFixture<CustomerSummaryComponent>;
+  let langService: LanguageService;
 
   const mockCustomer: Customer = {
     CIF: 'c1',
@@ -16,12 +18,21 @@ describe('CustomerSummaryComponent', () => {
   };
 
   beforeEach(async () => {
+    localStorage.removeItem('app_lang');
     await TestBed.configureTestingModule({
       imports: [CustomerSummaryComponent]
     }).compileComponents();
 
+    langService = TestBed.inject(LanguageService);
+    langService.setLanguage('en');
+
     fixture = TestBed.createComponent(CustomerSummaryComponent);
     component = fixture.componentInstance;
+  });
+
+  afterEach(() => {
+    langService.setLanguage('en');
+    localStorage.removeItem('app_lang');
   });
 
   it('should display no-selection message when customer is null', () => {
