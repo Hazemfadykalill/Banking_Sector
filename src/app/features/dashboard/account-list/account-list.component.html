@@ -23,7 +23,7 @@
       >
         <ng-template pTemplate="header">
           <tr>
-            <th>Account Number</th>
+            <th>IBAN</th>
             <th>Type</th>
             <th>Status</th>
             <th class="text-right">Balance</th>
@@ -36,11 +36,11 @@
             <td>
               <div class="account-number-cell">
                 <i class="pi pi-wallet account-icon"></i>
-                <strong>{{ acc.accountNumber }}</strong>
+                <strong>{{ acc.iban }}</strong>
               </div>
             </td>
             <td>
-              <p-tag [value]="acc.accountType" [severity]="getAccountTypeSeverity(acc.accountType)"></p-tag>
+              <p-tag [value]="acc.type" [severity]="getTypeSeverity(acc.type)"></p-tag>
             </td>
             <td>
               <p-tag [value]="acc.status" [severity]="getStatusSeverity(acc.status)"></p-tag>

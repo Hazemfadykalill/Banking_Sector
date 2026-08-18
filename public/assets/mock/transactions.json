@@ -1,7 +1,7 @@
 [
   {
     "id": "tx-1001",
-    "accountId": "acc-101",
+    "accountId": "A1001",
     "type": "Credit",
     "amount": 4500.00,
     "date": "2026-08-01T09:00:00Z",
@@ -12,7 +12,7 @@
   },
   {
     "id": "tx-1002",
-    "accountId": "acc-101",
+    "accountId": "A1001",
     "type": "Debit",
     "amount": 142.80,
     "date": "2026-08-03T14:22:00Z",
@@ -23,7 +23,7 @@
   },
   {
     "id": "tx-1003",
-    "accountId": "acc-101",
+    "accountId": "A1001",
     "type": "Debit",
     "amount": 95.50,
     "date": "2026-08-05T18:40:00Z",
@@ -34,7 +34,7 @@
   },
   {
     "id": "tx-1004",
-    "accountId": "acc-101",
+    "accountId": "A1001",
     "type": "Debit",
     "amount": 261.20,
     "date": "2026-08-10T12:15:00Z",
@@ -45,7 +45,7 @@
   },
   {
     "id": "tx-1005",
-    "accountId": "acc-102",
+    "accountId": "A1002",
     "type": "Credit",
     "amount": 1200.00,
     "date": "2026-08-02T10:30:00Z",
@@ -56,7 +56,7 @@
   },
   {
     "id": "tx-1006",
-    "accountId": "acc-103",
+    "accountId": "A1003",
     "type": "Credit",
     "amount": 3200.00,
     "date": "2026-08-01T08:30:00Z",
@@ -67,7 +67,7 @@
   },
   {
     "id": "tx-1007",
-    "accountId": "acc-103",
+    "accountId": "A1003",
     "type": "Debit",
     "amount": 550.00,
     "date": "2026-08-07T19:00:00Z",
@@ -78,7 +78,7 @@
   },
   {
     "id": "tx-1008",
-    "accountId": "acc-105",
+    "accountId": "A1005",
     "type": "Debit",
     "amount": 89.99,
     "date": "2026-08-12T11:05:00Z",

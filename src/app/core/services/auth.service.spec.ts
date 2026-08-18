@@ -36,24 +36,24 @@ describe('AuthService', () => {
   });
 
   it('should reject login if password is missing or empty', () => {
-    const result = service.login({ email: 'sarah.jenkins@example.com', password: '   ' });
+    const result = service.login({ email: 'ahmed.ali@mail.com', password: '   ' });
     expect(result.success).toBeFalse();
     expect(result.error).toContain('Password is required');
   });
 
   it('should authenticate successfully with valid credentials and persist session', () => {
-    const result = service.login({ email: 'sarah.jenkins@example.com', password: 'Password123!' });
+    const result = service.login({ email: 'ahmed.ali@mail.com', password: 'Password123!' });
 
     expect(result.success).toBeTrue();
     expect(service.isAuthenticated()).toBeTrue();
-    expect(service.session()?.customer.name).toBe('Sarah Jenkins');
+    expect(service.session()?.customer.name).toBe('Ahmed Ali');
 
     const storedSession = localStorage.getItem('banking_portal_session');
     expect(storedSession).not.toBeNull();
   });
 
   it('should clear session and navigate to /login on logout', () => {
-    service.login({ email: 'sarah.jenkins@example.com', password: 'Password123!' });
+    service.login({ email: 'ahmed.ali@mail.com', password: 'Password123!' });
     const spy = spyOn(router, 'navigate');
 
     service.logout();

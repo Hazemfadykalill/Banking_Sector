@@ -13,10 +13,10 @@ describe('DashboardComponent', () => {
   let authServiceSpy: jasmine.SpyObj<AuthService>;
 
   const mockCustomers: Customer[] = [
-    { id: 'c1', name: 'Sarah Jenkins', email: 'sarah@example.com', tier: 'Premium VIP' }
+    { CIF: 'c1', name: 'Ahmed Ali', nationalId: '29810251234567', segment: 'Retail', email: 'ahmed@mail.com', phone: '+20100000000' }
   ];
   const mockAccounts: Account[] = [
-    { id: 'a1', customerId: 'c1', accountNumber: 'CHK-101', accountType: 'Checking', balance: 10000, currency: 'USD', status: 'Active', createdAt: '' }
+    { id: 'a1', customerId: 'c1', iban: 'EG380019000000000123456789', type: 'Current', balance: 10000, currency: 'EGP', status: 'Active', createdAt: '' }
   ];
 
   beforeEach(async () => {

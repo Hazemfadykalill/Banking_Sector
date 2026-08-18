@@ -40,7 +40,7 @@ export class AdvancedComponent implements OnInit {
 
     const csvStr = formatTransactionCsv(txs);
     const dateStr = new Date().toISOString().split('T')[0];
-    const filename = `transactions-${selAcc.accountNumber}-${dateStr}.csv`;
+    const filename = `transactions-${selAcc.iban}-${dateStr}.csv`;
 
     downloadCsvFile(csvStr, filename);
   }
