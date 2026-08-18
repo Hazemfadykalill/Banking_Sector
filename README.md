@@ -10,6 +10,15 @@
 
 ---
 
+## 📋 Deliverables
+
+- **GitHub Repository**: [Hazemfadykalill/Banking_Sector](https://github.com/Hazemfadykalill/Banking_Sector)
+- **README Documentation**: [README.md](README.md)
+- **Feature List & Technical Assumptions**: [FEATURES.pdf](FEATURES.pdf)
+- **Demo Video**: 📹 Demo Video: [link here]
+
+---
+
 > [!NOTE]  
 > **Frontend Engineering Assessment Context**  
 > This repository was developed as a senior frontend technical assessment. It demonstrates production-quality Angular architecture, state orchestration via Signals, Reactive Form validation, custom RxJS data access layer, accessibility compliance, and unit testing discipline. All backend data, customer accounts, and authentication sessions are simulated client-side.
