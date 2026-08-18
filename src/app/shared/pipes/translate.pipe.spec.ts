@@ -7,11 +7,18 @@ describe('TranslatePipe', () => {
   let langService: LanguageService;
 
   beforeEach(() => {
+    localStorage.removeItem('app_lang');
     TestBed.configureTestingModule({
       providers: [LanguageService, TranslatePipe]
     });
     langService = TestBed.inject(LanguageService);
+    langService.setLanguage('en');
     pipe = TestBed.inject(TranslatePipe);
+  });
+
+  afterEach(() => {
+    langService.setLanguage('en');
+    localStorage.removeItem('app_lang');
   });
 
   it('create an instance', () => {
