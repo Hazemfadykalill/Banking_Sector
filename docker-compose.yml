@@ -1,0 +1,11 @@
+name: banking-sector
+
+services:
+  banking-portal:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: banking-portal-app
+    ports:
+      - "8080:80"
+    restart: unless-stopped
