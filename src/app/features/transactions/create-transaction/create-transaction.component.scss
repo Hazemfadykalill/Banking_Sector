@@ -1,0 +1,91 @@
+.target-account-badge {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.85rem 1rem;
+  margin-bottom: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+
+  .acc-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #0f172a;
+
+    i {
+      color: #2563eb;
+    }
+  }
+
+  .acc-balance {
+    color: #64748b;
+    strong {
+      color: #1e293b;
+    }
+  }
+}
+
+.tx-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+
+  label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #334155;
+
+    .required {
+      color: #ef4444;
+    }
+  }
+
+  .error-text {
+    color: #dc2626;
+    font-size: 0.78rem;
+    font-weight: 500;
+  }
+}
+
+.form-business-error {
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+
+  i {
+    font-size: 1rem;
+  }
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.mb-3 {
+  margin-bottom: 1rem;
+}

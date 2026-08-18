@@ -1,0 +1,18 @@
+<nav class="app-navigation" aria-label="Main Navigation">
+  <div class="nav-container">
+    <ul class="nav-list">
+      @for (item of navItems; track item.route) {
+        <li class="nav-item">
+          <a
+            [routerLink]="item.route"
+            routerLinkActive="active"
+            class="nav-link"
+          >
+            <i [class]="item.icon" class="nav-icon"></i>
+            <span class="nav-label">{{ item.label }}</span>
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</nav>

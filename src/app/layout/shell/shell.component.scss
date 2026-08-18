@@ -1,0 +1,48 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: var(--surface-ground, #f8fafc);
+  color: var(--text-color, #1e293b);
+}
+
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem;
+}
+
+.content-container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.loading-state, .error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 350px;
+  gap: 1rem;
+}
+
+.loading-text {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.app-footer {
+  background: #0f172a;
+  color: #64748b;
+  font-size: 0.8rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid #1e293b;
+
+  .footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    text-align: center;
+  }
+}

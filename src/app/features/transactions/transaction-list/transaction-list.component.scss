@@ -1,0 +1,140 @@
+.transaction-list-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.table-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+
+  h3 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #0f172a;
+  }
+
+  .count-chip {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #64748b;
+    background: #f1f5f9;
+    padding: 0.25rem 0.65rem;
+    border-radius: 12px;
+  }
+}
+
+.table-responsive-wrapper {
+  overflow-x: auto;
+}
+
+:host ::ng-deep .custom-tx-table {
+  .p-datatable-thead > tr > th {
+    background: #f8fafc;
+    color: #475569;
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.85rem 1rem;
+    border-bottom: 2px solid #e2e8f0;
+  }
+
+  .p-datatable-tbody > tr {
+    td {
+      padding: 0.85rem 1rem;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.88rem;
+      color: #1e293b;
+    }
+  }
+
+  .p-paginator {
+    margin-top: 1rem;
+    border: none;
+    background: transparent;
+  }
+}
+
+.date-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: #475569;
+
+  .date-icon {
+    font-size: 0.85rem;
+    color: #94a3b8;
+  }
+}
+
+.merchant-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  .merchant-name {
+    color: #0f172a;
+  }
+
+  .tx-description {
+    font-size: 0.78rem;
+    color: #64748b;
+  }
+}
+
+.amount-display {
+  font-size: 0.95rem;
+
+  &.credit-text {
+    color: #16a34a;
+  }
+
+  &.debit-text {
+    color: #dc2626;
+  }
+}
+
+.balance-after-text {
+  font-size: 0.85rem;
+  color: #64748b;
+}
+
+.empty-state-container {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: #64748b;
+
+  .empty-icon {
+    font-size: 2.5rem;
+    color: #94a3b8;
+    margin-bottom: 0.75rem;
+  }
+
+  h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #1e293b;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.88rem;
+    max-width: 420px;
+    margin: 0 auto;
+  }
+}
+
+.text-right {
+  text-align: right;
+}
+
+.font-semibold {
+  font-weight: 600;
+}

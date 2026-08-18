@@ -1,0 +1,12 @@
+[
+  {
+    "id": "type-debit",
+    "name": "Debit",
+    "description": "Outgoing transaction deducting funds from account"
+  },
+  {
+    "id": "type-credit",
+    "name": "Credit",
+    "description": "Incoming transaction adding funds to account"
+  }
+]

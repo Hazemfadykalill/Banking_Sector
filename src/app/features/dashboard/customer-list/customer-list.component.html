@@ -1,0 +1,52 @@
+<div class="customer-list-wrapper">
+  <div class="list-header">
+    <h3>Customer Directory</h3>
+    <span class="customer-count-badge">{{ customers.length }} Registered</span>
+  </div>
+
+  @if (customers.length === 0) {
+    <div class="empty-list-notice">
+      <i class="pi pi-users empty-icon"></i>
+      <p>No customers available in directory.</p>
+    </div>
+  } @else {
+    <div class="customers-grid" role="listbox" aria-label="Select Customer">
+      @for (cust of customers; track cust.id) {
+        <div
+          class="customer-card-item"
+          [class.selected]="cust.id === selectedCustomerId"
+          role="option"
+          [attr.aria-selected]="cust.id === selectedCustomerId"
+          tabindex="0"
+          (click)="selectCustomer(cust.id)"
+          (keydown)="onKeyDown($event, cust.id)"
+        >
+          <div class="item-avatar">
+            <p-avatar
+              [label]="cust.name.charAt(0)"
+              shape="circle"
+              size="normal"
+              styleClass="avatar-circle"
+            ></p-avatar>
+          </div>
+
+          <div class="item-details">
+            <div class="name-row">
+              <strong class="customer-name">{{ cust.name }}</strong>
+              @if (cust.tier) {
+                <p-tag [value]="cust.tier" [severity]="getTierSeverity(cust.tier)"></p-tag>
+              }
+            </div>
+            <span class="customer-email">{{ cust.email }}</span>
+          </div>
+
+          @if (cust.id === selectedCustomerId) {
+            <div class="selected-indicator">
+              <i class="pi pi-check-circle"></i>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  }
+</div>

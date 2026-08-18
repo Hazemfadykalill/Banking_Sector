@@ -1,0 +1,85 @@
+<div class="dashboard-page">
+  <div class="welcome-banner">
+    <div class="banner-text">
+      <h2>Welcome back, {{ authService.session()?.customer?.name || 'Valued User' }}</h2>
+      <p>Apex Banking Enterprise Overview & Customer Context Manager</p>
+    </div>
+    <div class="banner-meta">
+      <span class="system-status"><i class="pi pi-circle-fill online-dot"></i> Live Core Banking System</span>
+    </div>
+  </div>
+
+  <!-- Overall System Quick Stat Cards -->
+  <div class="summary-metrics-row">
+    <div class="summary-metric-card">
+      <div class="metric-icon-box blue">
+        <i class="pi pi-users"></i>
+      </div>
+      <div class="metric-details">
+        <span class="metric-label">Managed Customers</span>
+        <strong class="metric-value">{{ facade.customers().length }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-metric-card">
+      <div class="metric-icon-box green">
+        <i class="pi pi-wallet"></i>
+      </div>
+      <div class="metric-details">
+        <span class="metric-label">Active Bank Accounts</span>
+        <strong class="metric-value">{{ facade.accounts().length }}</strong>
+      </div>
+    </div>
+
+    <div class="summary-metric-card">
+      <div class="metric-icon-box purple">
+        <i class="pi pi-building-columns"></i>
+      </div>
+      <div class="metric-details">
+        <span class="metric-label">Total Bank Liquidity</span>
+        <strong class="metric-value">{{ systemTotalLiquidity() | currency:'USD':'symbol':'1.2-2' }}</strong>
+      </div>
+    </div>
+  </div>
+
+  @if (facade.isLoading()) {
+    <div class="dashboard-skeleton-grid">
+      <div class="skeleton-col">
+        <p-skeleton width="100%" height="400px" borderRadius="12px"></p-skeleton>
+      </div>
+      <div class="skeleton-col">
+        <p-skeleton width="100%" height="220px" borderRadius="12px" styleClass="mb-3"></p-skeleton>
+        <p-skeleton width="100%" height="250px" borderRadius="12px"></p-skeleton>
+      </div>
+    </div>
+  } @else if (facade.error()) {
+    <div class="error-banner-wrapper">
+      <p-message severity="error" [text]="facade.error()!"></p-message>
+      <p-button label="Retry Loading Dashboard" icon="pi pi-refresh" (onClick)="onRetry()"></p-button>
+    </div>
+  } @else {
+    <div class="dashboard-main-grid">
+      <div class="grid-left-panel">
+        <app-customer-list
+          [customers]="facade.customers()"
+          [selectedCustomerId]="facade.selectedCustomer()?.id || null"
+          (customerSelect)="onCustomerSelect($event)"
+        ></app-customer-list>
+      </div>
+
+      <div class="grid-right-panel">
+        <app-customer-summary
+          [customer]="facade.selectedCustomer()"
+          [accountCount]="facade.customerAccounts().length"
+          [totalBalance]="totalPortfolioBalance()"
+        ></app-customer-summary>
+
+        <app-account-list
+          [accounts]="facade.customerAccounts()"
+          [selectedAccountId]="facade.selectedAccount()?.id || null"
+          (accountSelect)="onAccountSelect($event)"
+        ></app-account-list>
+      </div>
+    </div>
+  }
+</div>

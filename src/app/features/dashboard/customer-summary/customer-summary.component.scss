@@ -1,0 +1,146 @@
+.customer-summary-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.no-selection {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #94a3b8;
+
+  i {
+    font-size: 2.5rem;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+  }
+}
+
+.summary-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+
+  .avatar-column {
+    flex-shrink: 0;
+
+    :host ::ng-deep .summary-avatar {
+      background: linear-gradient(135deg, #2563eb, #1d4ed8);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 1.4rem;
+      width: 56px;
+      height: 56px;
+    }
+  }
+
+  .info-column {
+    display: flex;
+    flex-direction: column;
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      h2 {
+        margin: 0;
+        font-size: 1.3rem;
+        font-weight: 800;
+        color: #0f172a;
+      }
+    }
+
+    .customer-id {
+      margin: 0.25rem 0 0 0;
+      font-size: 0.82rem;
+      color: #64748b;
+    }
+  }
+}
+
+:host ::ng-deep .summary-divider {
+  margin: 1.25rem 0;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+
+  &.full-width {
+    grid-column: 1 / -1;
+  }
+
+  .detail-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    i {
+      font-size: 0.85rem;
+      color: #3b82f6;
+    }
+  }
+
+  .detail-value {
+    font-size: 0.9rem;
+    color: #1e293b;
+    font-weight: 500;
+  }
+}
+
+.financial-quick-metrics {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.metric-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+
+  .metric-title {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #64748b;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .metric-number {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #0f172a;
+  }
+
+  &.highlight {
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(29, 78, 216, 0.1));
+    border-color: rgba(37, 99, 235, 0.2);
+
+    .metric-number {
+      color: #1d4ed8;
+    }
+  }
+}

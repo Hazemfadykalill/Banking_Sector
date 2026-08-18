@@ -1,0 +1,136 @@
+.mini-statement-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.25rem;
+
+  .title-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .header-icon {
+      font-size: 1.1rem;
+      color: #2563eb;
+    }
+
+    h3 {
+      margin: 0;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #0f172a;
+    }
+  }
+
+  .acc-badge {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: #475569;
+    background: #f1f5f9;
+    padding: 0.25rem 0.6rem;
+    border-radius: 8px;
+  }
+}
+
+.recent-tx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tx-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #f1f5f9;
+  background: #f8fafc;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: #ffffff;
+    border-color: #cbd5e1;
+  }
+}
+
+.tx-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.type-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+
+  &.credit {
+    background: rgba(22, 163, 74, 0.1);
+    color: #16a34a;
+  }
+
+  &.debit {
+    background: rgba(220, 38, 38, 0.1);
+    color: #dc2626;
+  }
+}
+
+.tx-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+
+  .merchant-title {
+    font-size: 0.88rem;
+    color: #0f172a;
+  }
+
+  .tx-date-cat {
+    font-size: 0.78rem;
+    color: #64748b;
+  }
+}
+
+.tx-right {
+  .tx-amount {
+    font-size: 0.92rem;
+    font-weight: 700;
+
+    &.credit-text {
+      color: #16a34a;
+    }
+
+    &.debit-text {
+      color: #dc2626;
+    }
+  }
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: #94a3b8;
+
+  i {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.85rem;
+  }
+}
