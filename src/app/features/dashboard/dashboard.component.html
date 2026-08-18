@@ -62,7 +62,7 @@
       <div class="grid-left-panel">
         <app-customer-list
           [customers]="facade.customers()"
-          [selectedCustomerId]="facade.selectedCustomer()?.id || null"
+          [selectedCustomerId]="facade.selectedCustomer()?.CIF || null"
           (customerSelect)="onCustomerSelect($event)"
         ></app-customer-list>
       </div>

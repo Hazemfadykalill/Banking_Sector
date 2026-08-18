@@ -11,15 +11,15 @@
     </div>
   } @else {
     <div class="customers-grid" role="listbox" aria-label="Select Customer">
-      @for (cust of customers; track cust.id) {
+      @for (cust of customers; track cust.CIF) {
         <div
           class="customer-card-item"
-          [class.selected]="cust.id === selectedCustomerId"
+          [class.selected]="cust.CIF === selectedCustomerId"
           role="option"
-          [attr.aria-selected]="cust.id === selectedCustomerId"
+          [attr.aria-selected]="cust.CIF === selectedCustomerId"
           tabindex="0"
-          (click)="selectCustomer(cust.id)"
-          (keydown)="onKeyDown($event, cust.id)"
+          (click)="selectCustomer(cust.CIF)"
+          (keydown)="onKeyDown($event, cust.CIF)"
         >
           <div class="item-avatar">
             <p-avatar
@@ -33,14 +33,14 @@
           <div class="item-details">
             <div class="name-row">
               <strong class="customer-name">{{ cust.name }}</strong>
-              @if (cust.tier) {
-                <p-tag [value]="cust.tier" [severity]="getTierSeverity(cust.tier)"></p-tag>
+              @if (cust.segment) {
+                <p-tag [value]="cust.segment" [severity]="getSegmentSeverity(cust.segment)"></p-tag>
               }
             </div>
             <span class="customer-email">{{ cust.email }}</span>
           </div>
 
-          @if (cust.id === selectedCustomerId) {
+          @if (cust.CIF === selectedCustomerId) {
             <div class="selected-indicator">
               <i class="pi pi-check-circle"></i>
             </div>

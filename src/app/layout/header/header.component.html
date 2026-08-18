@@ -17,8 +17,8 @@
         <div class="customer-badge">
           <span class="badge-label">Active Portal User:</span>
           <strong class="customer-name">{{ customer.name }}</strong>
-          @if (customer.tier) {
-            <p-tag [value]="customer.tier" severity="warn"></p-tag>
+          @if (customer.segment) {
+            <p-tag [value]="customer.segment" severity="warn"></p-tag>
           }
         </div>
       }

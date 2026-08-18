@@ -7,8 +7,8 @@ describe('AccountListComponent', () => {
   let fixture: ComponentFixture<AccountListComponent>;
 
   const mockAccounts: Account[] = [
-    { id: 'a1', customerId: 'c1', accountNumber: 'CHK-101', accountType: 'Checking', balance: 14500.5, currency: 'USD', status: 'Active', createdAt: '' },
-    { id: 'a2', customerId: 'c1', accountNumber: 'SAV-102', accountType: 'Savings', balance: 48250.75, currency: 'USD', status: 'Active', createdAt: '' }
+    { id: 'a1', customerId: 'c1', iban: 'EG380019000000000123456789', type: 'Current', balance: 14500.5, currency: 'EGP', status: 'Active', createdAt: '' },
+    { id: 'a2', customerId: 'c1', iban: 'EG380019000000000987654321', type: 'Savings', balance: 48250.75, currency: 'EGP', status: 'Active', createdAt: '' }
   ];
 
   beforeEach(async () => {
@@ -29,8 +29,8 @@ describe('AccountListComponent', () => {
 
   it('should render account rows with formatted currency', () => {
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('CHK-101');
-    expect(compiled.textContent).toContain('SAV-102');
+    expect(compiled.textContent).toContain('EG380019000000000123456789');
+    expect(compiled.textContent).toContain('EG380019000000000987654321');
     expect(compiled.textContent).toContain('14,500.50');
     expect(compiled.textContent).toContain('48,250.75');
   });

@@ -8,9 +8,9 @@ describe('TransactionsComponent', () => {
   let fixture: ComponentFixture<TransactionsComponent>;
   let facadeSpy: jasmine.SpyObj<BankingFacadeService>;
 
-  const mockCustomer: Customer = { id: 'c1', name: 'Sarah Jenkins', email: 'sarah@example.com' };
+  const mockCustomer: Customer = { CIF: 'c1', name: 'Sarah Jenkins', nationalId: '29810251234567', segment: 'Retail', email: 'sarah@example.com', phone: '+20100000000' };
   const mockAccounts: Account[] = [
-    { id: 'a1', customerId: 'c1', accountNumber: 'CHK-101', accountType: 'Checking', balance: 1000, currency: 'USD', status: 'Active', createdAt: '' }
+    { id: 'a1', customerId: 'c1', iban: 'EG380019000000000123456789', type: 'Current', balance: 1000, currency: 'EGP', status: 'Active', createdAt: '' }
   ];
   const mockTransactions: Transaction[] = [
     { id: 'tx1', accountId: 'a1', type: 'Debit', amount: 100, date: '2026-02-10T10:00:00Z', merchant: 'Grocery', category: 'Groceries', balanceAfter: 900 },

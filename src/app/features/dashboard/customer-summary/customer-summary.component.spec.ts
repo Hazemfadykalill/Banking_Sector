@@ -7,12 +7,12 @@ describe('CustomerSummaryComponent', () => {
   let fixture: ComponentFixture<CustomerSummaryComponent>;
 
   const mockCustomer: Customer = {
-    id: 'c1',
-    name: 'Sarah Jenkins',
-    email: 'sarah@example.com',
-    phone: '+1 555-0199',
-    tier: 'Premium VIP',
-    address: '123 Main St'
+    CIF: 'c1',
+    name: 'Ahmed Ali',
+    nationalId: '29810251234567',
+    segment: 'Retail',
+    email: 'ahmed@mail.com',
+    phone: '+20100000000'
   };
 
   beforeEach(async () => {
@@ -40,8 +40,8 @@ describe('CustomerSummaryComponent', () => {
     fixture.detectChanges();
 
     const compiled = fixture.nativeElement as HTMLElement;
-    expect(compiled.textContent).toContain('Sarah Jenkins');
-    expect(compiled.textContent).toContain('sarah@example.com');
+    expect(compiled.textContent).toContain('Ahmed Ali');
+    expect(compiled.textContent).toContain('ahmed@mail.com');
     expect(compiled.textContent).toContain('62,751.25');
   });
 });

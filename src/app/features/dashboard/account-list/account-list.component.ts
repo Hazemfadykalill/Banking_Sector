@@ -23,8 +23,9 @@ export class AccountListComponent {
     this.accountSelect.emit(id);
   }
 
-  getAccountTypeSeverity(type: string): 'success' | 'info' | 'warn' | 'secondary' {
+  getTypeSeverity(type: string): 'success' | 'info' | 'warn' | 'secondary' {
     switch (type.toLowerCase()) {
+      case 'current':
       case 'checking': return 'info';
       case 'savings': return 'success';
       case 'investment': return 'warn';

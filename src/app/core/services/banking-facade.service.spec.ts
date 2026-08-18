@@ -9,10 +9,10 @@ describe('BankingFacadeService', () => {
   let dataServiceSpy: jasmine.SpyObj<BankingDataService>;
 
   const mockCustomers: Customer[] = [
-    { id: 'c1', name: 'John Doe', email: 'john@example.com' }
+    { CIF: 'c1', name: 'John Doe', nationalId: '29810251234567', segment: 'Retail', email: 'john@example.com', phone: '+20100000000' }
   ];
   const mockAccounts: Account[] = [
-    { id: 'a1', customerId: 'c1', accountNumber: '12345', accountType: 'Checking', balance: 1000, currency: 'USD', status: 'Active', createdAt: '' }
+    { id: 'a1', customerId: 'c1', iban: '12345', type: 'Current', balance: 1000, currency: 'EGP', status: 'Active', createdAt: '' }
   ];
   const mockTransactions: Transaction[] = [
     { id: 't1', accountId: 'a1', type: 'Credit', amount: 500, date: '2026-08-01', merchant: 'Salary', category: 'Salary', balanceAfter: 1000 }

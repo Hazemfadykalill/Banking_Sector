@@ -1,10 +1,11 @@
+export type CustomerSegment = 'Retail' | 'Priority' | 'Business';
+
 export interface Customer {
-  id: string;
+  CIF: string;
   name: string;
+  nationalId: string;
+  segment: CustomerSegment;
   email: string;
-  phone?: string;
-  avatar?: string;
-  address?: string;
-  customerSince?: string;
-  tier?: string;
+  phone: string;
 }
+

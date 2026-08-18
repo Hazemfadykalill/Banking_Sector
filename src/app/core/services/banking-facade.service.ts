@@ -42,7 +42,7 @@ export class BankingFacadeService {
   readonly customerAccounts = computed(() => {
     const cust = this._selectedCustomer();
     if (!cust) return [];
-    return this._accounts().filter(a => a.customerId === cust.id);
+    return this._accounts().filter(a => a.customerId === cust.CIF);
   });
 
   readonly selectedAccountTransactions = computed(() => {
@@ -80,7 +80,7 @@ export class BankingFacadeService {
         if (customers.length > 0) {
           const firstCustomer = customers[0];
           this._selectedCustomer.set(firstCustomer);
-          const firstCustAccounts = accounts.filter(a => a.customerId === firstCustomer.id);
+          const firstCustAccounts = accounts.filter(a => a.customerId === firstCustomer.CIF);
           if (firstCustAccounts.length > 0) {
             this._selectedAccount.set(firstCustAccounts[0]);
           }
@@ -96,10 +96,10 @@ export class BankingFacadeService {
   }
 
   selectCustomer(customerId: string): void {
-    const cust = this._customers().find(c => c.id === customerId) || null;
+    const cust = this._customers().find(c => c.CIF === customerId) || null;
     this._selectedCustomer.set(cust);
     if (cust) {
-      const custAccounts = this._accounts().filter(a => a.customerId === cust.id);
+      const custAccounts = this._accounts().filter(a => a.customerId === cust.CIF);
       this._selectedAccount.set(custAccounts.length > 0 ? custAccounts[0] : null);
     } else {
       this._selectedAccount.set(null);
