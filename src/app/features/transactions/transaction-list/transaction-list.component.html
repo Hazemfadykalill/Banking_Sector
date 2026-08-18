@@ -20,11 +20,10 @@
     <div class="table-responsive-wrapper">
       <p-table
         [value]="transactions"
-        [paginator]="true"
-        [rows]="rowsPerPage"
-        [rowsPerPageOptions]="[5, 10, 20, 50]"
-        [showCurrentPageReport]="true"
-        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} transactions"
+        [scrollable]="true"
+        scrollHeight="460px"
+        [virtualScroll]="true"
+        [virtualScrollItemSize]="54"
         styleClass="p-datatable-striped p-datatable-sm custom-tx-table"
         dataKey="id"
       >
