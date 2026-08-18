@@ -53,6 +53,7 @@ export class BankingFacadeService {
 
   /**
    * Initializes application static datasets once.
+   * Hydrates accounts and transactions from localStorage if present.
    */
   loadInitialData(): void {
     if (this._customers().length > 0) {
@@ -70,9 +71,11 @@ export class BankingFacadeService {
       types: this.dataService.getTransactionTypes()
     }).pipe(
       tap(({ customers, accounts, transactions, categories, types }) => {
+        const storedState = this.loadStateFromStorage();
+
         this._customers.set(customers);
-        this._accounts.set(accounts);
-        this._transactions.set(transactions);
+        this._accounts.set(storedState ? storedState.accounts : accounts);
+        this._transactions.set(storedState ? storedState.transactions : transactions);
         this._categories.set(categories);
         this._types.set(types);
 
@@ -80,7 +83,8 @@ export class BankingFacadeService {
         if (customers.length > 0) {
           const firstCustomer = customers[0];
           this._selectedCustomer.set(firstCustomer);
-          const firstCustAccounts = accounts.filter(a => a.customerId === firstCustomer.CIF);
+          const activeAccounts = this._accounts();
+          const firstCustAccounts = activeAccounts.filter(a => a.customerId === firstCustomer.CIF);
           if (firstCustAccounts.length > 0) {
             this._selectedAccount.set(firstCustAccounts[0]);
           }
@@ -114,6 +118,7 @@ export class BankingFacadeService {
   /**
    * Immediate optimistic transaction creation & balance update.
    * Enforces business rules and updates state in-memory without re-fetching JSON.
+   * Automatically persists updated state to localStorage.
    */
   addTransaction(req: CreateTransactionRequest): { success: boolean; error?: string; transaction?: Transaction } {
     const currentAccount = this._accounts().find(a => a.id === req.accountId);
@@ -159,10 +164,47 @@ export class BankingFacadeService {
       this._selectedAccount.update(acc => acc ? { ...acc, balance: newBalance } : null);
     }
 
+    this.saveStateToStorage();
+
     return { success: true, transaction: newTx };
   }
 
   clearError(): void {
     this._error.set(null);
+  }
+
+  /**
+   * Saves accounts and transactions signals to localStorage.
+   */
+  private saveStateToStorage(): void {
+    try {
+      localStorage.setItem('banking_accounts', JSON.stringify(this._accounts()));
+      localStorage.setItem('banking_transactions', JSON.stringify(this._transactions()));
+    } catch (e) {
+      console.warn('[BankingFacadeService] Unable to save state to localStorage:', e);
+    }
+  }
+
+  /**
+   * Hydrates state from localStorage if valid JSON data exists.
+   */
+  private loadStateFromStorage(): { accounts: Account[]; transactions: Transaction[] } | null {
+    try {
+      const rawAccounts = localStorage.getItem('banking_accounts');
+      const rawTransactions = localStorage.getItem('banking_transactions');
+
+      if (rawAccounts && rawTransactions) {
+        const accounts = JSON.parse(rawAccounts) as Account[];
+        const transactions = JSON.parse(rawTransactions) as Transaction[];
+        if (Array.isArray(accounts) && Array.isArray(transactions)) {
+          return { accounts, transactions };
+        }
+      }
+    } catch (e) {
+      console.warn('[BankingFacadeService] Invalid localStorage state, falling back to JSON assets:', e);
+      localStorage.removeItem('banking_accounts');
+      localStorage.removeItem('banking_transactions');
+    }
+    return null;
   }
 }
