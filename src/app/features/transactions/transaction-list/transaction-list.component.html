@@ -71,12 +71,12 @@
                 [class.credit-text]="tx.type === 'Credit'"
                 [class.debit-text]="tx.type === 'Debit'"
               >
-                {{ tx.type === 'Credit' ? '+' : '-' }}{{ tx.amount | currency:'USD':'symbol':'1.2-2' }}
+                {{ tx.type === 'Credit' ? '+' : '-' }}{{ tx.amount | currency:'EGP':'symbol':'1.2-2' }}
               </span>
             </td>
             <td class="text-right">
               <span class="balance-after-text">
-                {{ tx.balanceAfter | currency:'USD':'symbol':'1.2-2' }}
+                {{ tx.balanceAfter | currency:'EGP':'symbol':'1.2-2' }}
               </span>
             </td>
           </tr>
