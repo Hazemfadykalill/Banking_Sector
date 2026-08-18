@@ -8,6 +8,15 @@ describe('CSV Exporter Utility', () => {
     expect(escapeCsvCell('Say "Hello"')).toBe('"Say ""Hello"""');
   });
 
+  it('should prefix formula injection trigger characters with a single quote', () => {
+    expect(escapeCsvCell('=1+2')).toBe("'=1+2");
+    expect(escapeCsvCell('+123')).toBe("'+123");
+    expect(escapeCsvCell('-456')).toBe("'-456");
+    expect(escapeCsvCell('@SUM(A1:A10)')).toBe("'@SUM(A1:A10)");
+    expect(escapeCsvCell('\tTabStart')).toBe("'\tTabStart");
+    expect(escapeCsvCell('\rCRStart')).toBe('"\'\rCRStart"');
+  });
+
   it('should format transaction data into valid CSV lines', () => {
     const mockTxs: Transaction[] = [
       {
