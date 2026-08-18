@@ -1,10 +1,9 @@
 [
   { "id": "cat-groceries", "name": "Groceries", "icon": "pi pi-shopping-cart", "color": "#10B981" },
-  { "id": "cat-utilities", "name": "Utilities", "icon": "pi pi-bolt", "color": "#F59E0B" },
-  { "id": "cat-salary", "name": "Salary", "icon": "pi pi-wallet", "color": "#3B82F6" },
-  { "id": "cat-entertainment", "name": "Entertainment", "icon": "pi pi-ticket", "color": "#8B5CF6" },
-  { "id": "cat-transfer", "name": "Transfer", "icon": "pi pi-arrows-h", "color": "#6366F1" },
+  { "id": "cat-bills", "name": "Bills", "icon": "pi pi-receipt", "color": "#F59E0B" },
   { "id": "cat-shopping", "name": "Shopping", "icon": "pi pi-shopping-bag", "color": "#EC4899" },
-  { "id": "cat-dining", "name": "Dining", "icon": "pi pi-slack", "color": "#EF4444" },
-  { "id": "cat-investment", "name": "Investment", "icon": "pi pi-chart-line", "color": "#14B8A6" }
+  { "id": "cat-transfer", "name": "Transfer", "icon": "pi pi-arrows-h", "color": "#6366F1" },
+  { "id": "cat-income", "name": "Income", "icon": "pi pi-wallet", "color": "#3B82F6" },
+  { "id": "cat-fees", "name": "Fees", "icon": "pi pi-percentage", "color": "#EF4444" },
+  { "id": "cat-entertainment", "name": "Entertainment", "icon": "pi pi-ticket", "color": "#8B5CF6" }
 ]
