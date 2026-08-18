@@ -2,7 +2,7 @@
   @if (!customer) {
     <div class="no-selection">
       <i class="pi pi-user-minus"></i>
-      <p>Select a customer from the directory to inspect details.</p>
+      <p>{{ 'customerSummary.selectPrompt' | translate }}</p>
     </div>
   } @else {
     <div class="summary-header">
@@ -22,7 +22,7 @@
             <p-tag [value]="customer.segment" severity="warn"></p-tag>
           }
         </div>
-        <p class="customer-id">CIF Reference: <strong>{{ customer.CIF }}</strong></p>
+        <p class="customer-id">{{ 'customerSummary.cif' | translate }} <strong>{{ customer.CIF }}</strong></p>
       </div>
     </div>
 
@@ -35,7 +35,7 @@
       </div>
 
       <div class="detail-item">
-        <span class="detail-label"><i class="pi pi-envelope"></i> Email</span>
+        <span class="detail-label"><i class="pi pi-envelope"></i> {{ 'customerSummary.email' | translate }}</span>
         <span class="detail-value">{{ customer.email }}</span>
       </div>
 
@@ -49,12 +49,12 @@
 
     <div class="financial-quick-metrics">
       <div class="metric-card">
-        <span class="metric-title">Associated Accounts</span>
+        <span class="metric-title">{{ 'customerSummary.totalAccounts' | translate }}</span>
         <span class="metric-number">{{ accountCount }}</span>
       </div>
 
       <div class="metric-card highlight">
-        <span class="metric-title">Total Portfolio Value</span>
+        <span class="metric-title">{{ 'customerSummary.totalPortfolio' | translate }}</span>
         <span class="metric-number">{{ totalBalance | currency:'EGP':'symbol':'1.2-2' }}</span>
       </div>
     </div>

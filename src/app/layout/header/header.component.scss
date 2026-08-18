@@ -5,7 +5,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   display: flex;
   align-items: center;
-  padding: 0 1.5rem;
+  padding: 0 1.25rem;
   box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
   position: sticky;
   top: 0;
@@ -31,14 +31,14 @@
   }
 
   .brand-icon {
-    width: 40px;
-    height: 40px;
+    width: 38px;
+    height: 38px;
     background: linear-gradient(135deg, #2563eb, #1d4ed8);
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.25rem;
+    font-size: 1.2rem;
     color: #ffffff;
     box-shadow: 0 2px 4px rgba(37, 99, 235, 0.3);
   }
@@ -48,7 +48,7 @@
     flex-direction: column;
 
     .brand-name {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 800;
       letter-spacing: 0.05em;
       color: #ffffff;
@@ -67,7 +67,7 @@
 .header-actions {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: 1rem;
 
   .customer-badge {
     display: flex;
@@ -88,12 +88,25 @@
     }
   }
 
+  .toggle-group {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+
+    ::ng-deep .lang-toggle-btn {
+      color: #38bdf8 !important;
+      font-weight: 600 !important;
+      font-size: 0.85rem !important;
+      padding: 0.25rem 0.5rem !important;
+    }
+  }
+
   .user-profile {
     display: flex;
     align-items: center;
     gap: 0.75rem;
-    padding-left: 0.75rem;
-    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    padding-inline-start: 0.75rem;
+    border-inline-start: 1px solid rgba(255, 255, 255, 0.15);
 
     .user-email {
       font-size: 0.85rem;
@@ -102,8 +115,26 @@
   }
 }
 
-@media (max-width: 768px) {
-  .customer-badge, .user-email {
+@media (max-width: 900px) {
+  .customer-badge {
     display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-header {
+    padding: 0 0.75rem;
+  }
+
+  .user-email {
+    display: none;
+  }
+
+  .brand-text .brand-tag {
+    display: none;
+  }
+
+  .header-actions {
+    gap: 0.5rem;
   }
 }

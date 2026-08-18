@@ -1,11 +1,11 @@
 <div class="dashboard-page">
   <div class="welcome-banner">
     <div class="banner-text">
-      <h2>Welcome back, {{ authService.session()?.customer?.name || 'Valued User' }}</h2>
-      <p>Apex Banking Enterprise Overview & Customer Context Manager</p>
+      <h2>{{ 'dashboard.welcome' | translate }}, {{ authService.session()?.customer?.name || ('dashboard.valuedUser' | translate) }}</h2>
+      <p>{{ 'dashboard.welcomeSubtitle' | translate }}</p>
     </div>
     <div class="banner-meta">
-      <span class="system-status"><i class="pi pi-circle-fill online-dot"></i> Live Core Banking System</span>
+      <span class="system-status"><i class="pi pi-circle-fill online-dot"></i> {{ 'dashboard.liveStatus' | translate }}</span>
     </div>
   </div>
 
@@ -16,7 +16,7 @@
         <i class="pi pi-users"></i>
       </div>
       <div class="metric-details">
-        <span class="metric-label">Managed Customers</span>
+        <span class="metric-label">{{ 'dashboard.metricCustomers' | translate }}</span>
         <strong class="metric-value">{{ facade.customers().length }}</strong>
       </div>
     </div>
@@ -26,7 +26,7 @@
         <i class="pi pi-wallet"></i>
       </div>
       <div class="metric-details">
-        <span class="metric-label">Active Bank Accounts</span>
+        <span class="metric-label">{{ 'dashboard.metricAccounts' | translate }}</span>
         <strong class="metric-value">{{ facade.accounts().length }}</strong>
       </div>
     </div>
@@ -36,7 +36,7 @@
         <i class="pi pi-building-columns"></i>
       </div>
       <div class="metric-details">
-        <span class="metric-label">Total Bank Liquidity</span>
+        <span class="metric-label">{{ 'dashboard.metricLiquidity' | translate }}</span>
         <strong class="metric-value">{{ systemTotalLiquidity() | currency:'USD':'symbol':'1.2-2' }}</strong>
       </div>
     </div>
@@ -55,7 +55,7 @@
   } @else if (facade.error()) {
     <div class="error-banner-wrapper">
       <p-message severity="error" [text]="facade.error()!"></p-message>
-      <p-button label="Retry Loading Dashboard" icon="pi pi-refresh" (onClick)="onRetry()"></p-button>
+      <p-button [label]="'dashboard.retry' | translate" icon="pi pi-refresh" (onClick)="onRetry()"></p-button>
     </div>
   } @else {
     <div class="dashboard-main-grid">

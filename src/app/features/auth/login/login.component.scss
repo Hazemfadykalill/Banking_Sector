@@ -3,8 +3,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at 50% 20%, #1e293b 0%, #0f172a 100%);
+  background: var(--surface-ground, #0f172a);
   padding: 1.5rem;
+  transition: background-color 0.2s ease;
 }
 
 .login-card-container {
@@ -15,12 +16,24 @@
   gap: 1rem;
 }
 
+.login-top-bar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 0.5rem;
+
+  ::ng-deep .lang-btn {
+    color: #38bdf8 !important;
+    font-weight: 600 !important;
+  }
+}
+
 :host ::ng-deep .auth-card {
   border-radius: 16px;
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--surface-border, #e2e8f0);
   overflow: hidden;
-  background: #ffffff;
+  background: var(--surface-card, #ffffff);
 }
 
 .card-header-brand {
@@ -75,7 +88,7 @@
   .field-label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #334155;
+    color: var(--text-color, #334155);
   }
 }
 
@@ -84,7 +97,7 @@
 
   i {
     position: absolute;
-    left: 0.75rem;
+    inset-inline-start: 0.75rem;
     top: 50%;
     transform: translateY(-50%);
     color: #94a3b8;
@@ -92,7 +105,7 @@
   }
 
   input {
-    padding-left: 2.3rem;
+    padding-inline-start: 2.3rem;
   }
 }
 
@@ -121,8 +134,8 @@
     font-size: 0.7rem;
     font-weight: 700;
     letter-spacing: 0.1em;
-    color: #94a3b8;
-    background: #ffffff;
+    color: var(--text-secondary, #94a3b8);
+    background: var(--surface-card, #ffffff);
     padding: 0 0.5rem;
   }
 }
@@ -135,7 +148,7 @@
   .demo-hint {
     margin: 0;
     font-size: 0.8rem;
-    color: #64748b;
+    color: var(--text-secondary, #64748b);
     text-align: center;
   }
 
@@ -151,7 +164,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
-  color: #64748b;
+  color: var(--text-secondary, #64748b);
   font-size: 0.78rem;
 
   i {
@@ -161,6 +174,6 @@
 
 @media (max-width: 480px) {
   .login-page {
-    padding: 1rem;
+    padding: 1rem 0.75rem;
   }
 }

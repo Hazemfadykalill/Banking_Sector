@@ -7,6 +7,7 @@ import { BankingFacadeService } from '../../core/services/banking-facade.service
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { MessageModule } from 'primeng/message';
 import { ButtonModule } from 'primeng/button';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-shell',
@@ -18,7 +19,8 @@ import { ButtonModule } from 'primeng/button';
     NavigationComponent,
     ProgressSpinnerModule,
     MessageModule,
-    ButtonModule
+    ButtonModule,
+    TranslatePipe
   ],
   templateUrl: './shell.component.html',
   styleUrls: ['./shell.component.scss'],

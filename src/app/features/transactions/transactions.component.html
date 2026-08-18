@@ -2,7 +2,7 @@
   <!-- Top Context Header & Account Switcher -->
   <div class="page-top-header">
     <div class="account-selector-box">
-      <label for="accSelect" class="selector-label"><i class="pi pi-credit-card"></i> Selected Account</label>
+      <label for="accSelect" class="selector-label"><i class="pi pi-credit-card"></i> {{ 'accountList.selectedAcc' | translate }}</label>
       @if (facade.selectedAccount(); as selAcc) {
         <div class="account-picker-row">
           <p-select
@@ -17,21 +17,21 @@
 
           <div class="account-quick-summary">
             <span class="balance-tag">
-              Balance: <strong>{{ selAcc.balance | currency:selAcc.currency:'symbol':'1.2-2' }}</strong>
+              {{ 'createTx.accBalance' | translate }} <strong>{{ selAcc.balance | currency:selAcc.currency:'symbol':'1.2-2' }}</strong>
             </span>
             <p-tag [value]="selAcc.status" severity="success"></p-tag>
           </div>
         </div>
       } @else {
         <div class="no-account-alert">
-          <p-message severity="info" text="No account currently selected. Select a customer and account from the Dashboard."></p-message>
+          <p-message severity="info" [text]="'tx.showingAll' | translate"></p-message>
         </div>
       }
     </div>
 
     <div class="create-tx-action">
       <p-button
-        label="New Transaction"
+        [label]="'tx.newBtn' | translate"
         icon="pi pi-plus"
         severity="primary"
         [disabled]="!facade.selectedAccount()"
@@ -48,7 +48,7 @@
   } @else if (facade.error()) {
     <div class="error-wrapper">
       <p-message severity="error" [text]="facade.error()!"></p-message>
-      <p-button label="Retry" icon="pi pi-refresh" (onClick)="facade.loadInitialData()"></p-button>
+      <p-button [label]="'shell.retry' | translate" icon="pi pi-refresh" (onClick)="facade.loadInitialData()"></p-button>
     </div>
   } @else {
     <!-- Filters Panel -->

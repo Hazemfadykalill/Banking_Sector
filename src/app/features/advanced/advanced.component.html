@@ -1,13 +1,13 @@
 <div class="advanced-page">
   <div class="page-header">
     <div class="header-text">
-      <h2>Advanced Banking Intelligence</h2>
-      <p>Mini Statements, Financial Analytics & Automated CSV Export</p>
+      <h2>{{ 'adv.title' | translate }}</h2>
+      <p>{{ 'adv.subtitle' | translate }}</p>
     </div>
 
     <div class="header-actions">
       <p-button
-        label="Export CSV"
+        [label]="'mini.download' | translate"
         icon="pi pi-download"
         severity="success"
         [disabled]="!facade.selectedAccount() || facade.selectedAccountTransactions().length === 0"
@@ -24,7 +24,7 @@
   } @else if (facade.error()) {
     <div class="error-wrapper">
       <p-message severity="error" [text]="facade.error()!"></p-message>
-      <p-button label="Retry" icon="pi pi-refresh" (onClick)="facade.loadInitialData()"></p-button>
+      <p-button [label]="'shell.retry' | translate" icon="pi pi-refresh" (onClick)="facade.loadInitialData()"></p-button>
     </div>
   } @else {
     <div class="advanced-grid">

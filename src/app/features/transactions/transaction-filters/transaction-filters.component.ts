@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy, OnInit, input, computed } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectionStrategy, OnInit, input, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
@@ -7,6 +7,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { TransactionCategory, TransactionType, TransactionFilter, TransactionTypeKind } from '../../../core/models';
+import { LanguageService } from '../../../core/services/language.service';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-transaction-filters',
@@ -18,19 +20,21 @@ import { TransactionCategory, TransactionType, TransactionFilter, TransactionTyp
     DatePickerModule,
     InputTextModule,
     ButtonModule,
-    CardModule
+    CardModule,
+    TranslatePipe
   ],
   templateUrl: './transaction-filters.component.html',
   styleUrls: ['./transaction-filters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TransactionFiltersComponent implements OnInit {
+  private readonly langService = inject(LanguageService);
+
   readonly categories = input<TransactionCategory[]>([]);
   readonly types = input<TransactionType[]>([]);
   @Output() filterChange = new EventEmitter<TransactionFilter>();
   @Output() filterReset = new EventEmitter<void>();
 
-  // Filter model state
   startDate: Date | null = null;
   endDate: Date | null = null;
   selectedType: string = 'ALL';
@@ -39,29 +43,23 @@ export class TransactionFiltersComponent implements OnInit {
   sortBy: 'date' | 'amount' = 'date';
   sortOrder: 'asc' | 'desc' = 'desc';
 
-  typeOptions = [
-    { label: 'All Types', value: 'ALL' },
-    { label: 'Debit', value: 'Debit' },
-    { label: 'Credit', value: 'Credit' }
-  ];
-
-  sortOptions = [
-    { label: 'Date (Newest First)', sortBy: 'date', sortOrder: 'desc' },
-    { label: 'Date (Oldest First)', sortBy: 'date', sortOrder: 'asc' },
-    { label: 'Amount (Highest First)', sortBy: 'amount', sortOrder: 'desc' },
-    { label: 'Amount (Lowest First)', sortBy: 'amount', sortOrder: 'asc' }
-  ];
-
   selectedSortKey: string = 'date-desc';
 
-  ngOnInit(): void {
-    // Component initialized with defaults
-  }
+  ngOnInit(): void {}
+
+  readonly typeOptions = computed(() => [
+    { label: this.langService.translate('filters.allTypes'), value: 'ALL' },
+    { label: this.langService.translate('type.Debit'), value: 'Debit' },
+    { label: this.langService.translate('type.Credit'), value: 'Credit' }
+  ]);
 
   readonly categoryOptions = computed(() => {
     return [
-      { label: 'All Categories', value: 'ALL' },
-      ...this.categories().map(c => ({ label: c.name, value: c.name }))
+      { label: this.langService.translate('filters.allCategories'), value: 'ALL' },
+      ...this.categories().map(c => ({
+        label: this.langService.translate(`cat.${c.name}`),
+        value: c.name
+      }))
     ];
   });
 

@@ -2,7 +2,7 @@
   <div class="card-header">
     <div class="title-group">
       <i class="pi pi-history header-icon"></i>
-      <h3>Mini Statement</h3>
+      <h3>{{ 'mini.title' | translate }}</h3>
     </div>
     @if (selectedAccount()) {
       <span class="acc-badge">{{ selectedAccount()?.iban }}</span>
@@ -12,12 +12,12 @@
   @if (!selectedAccount()) {
     <div class="empty-state">
       <i class="pi pi-wallet"></i>
-      <p>No account selected. Select an account to view mini statement.</p>
+      <p>{{ 'mini.noAccount' | translate }}</p>
     </div>
   } @else if (recentTransactions().length === 0) {
     <div class="empty-state">
       <i class="pi pi-inbox"></i>
-      <p>No recent transactions recorded for this account.</p>
+      <p>{{ 'txList.noTx' | translate }}</p>
     </div>
   } @else {
     <div class="recent-tx-list">
@@ -29,7 +29,7 @@
             </div>
             <div class="tx-meta">
               <strong class="merchant-title">{{ tx.merchant }}</strong>
-              <span class="tx-date-cat">{{ tx.date | date:'shortDate' }} • {{ tx.category }}</span>
+              <span class="tx-date-cat">{{ tx.date | date:'shortDate' }} • {{ ('cat.' + tx.category) | translate }}</span>
             </div>
           </div>
 

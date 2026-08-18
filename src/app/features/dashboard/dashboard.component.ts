@@ -9,6 +9,7 @@ import { AuthService } from '../../core/services/auth.service';
 import { CustomerListComponent } from './customer-list/customer-list.component';
 import { CustomerSummaryComponent } from './customer-summary/customer-summary.component';
 import { AccountListComponent } from './account-list/account-list.component';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,8 @@ import { AccountListComponent } from './account-list/account-list.component';
     ButtonModule,
     CustomerListComponent,
     CustomerSummaryComponent,
-    AccountListComponent
+    AccountListComponent,
+    TranslatePipe
   ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],

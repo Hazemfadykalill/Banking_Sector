@@ -4,6 +4,7 @@
   min-height: 100vh;
   background-color: var(--surface-ground, #f8fafc);
   color: var(--text-color, #1e293b);
+  transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .main-content {
@@ -29,20 +30,30 @@
 }
 
 .loading-text {
-  color: #64748b;
+  color: var(--text-secondary, #64748b);
   font-weight: 500;
 }
 
 .app-footer {
-  background: #0f172a;
-  color: #64748b;
+  background: var(--header-bg, #0f172a);
+  color: var(--text-secondary, #64748b);
   font-size: 0.8rem;
   padding: 1rem 1.5rem;
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid var(--surface-border, #1e293b);
 
   .footer-container {
     max-width: 1400px;
     margin: 0 auto;
     text-align: center;
+
+    p {
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 640px) {
+  .main-content {
+    padding: 1rem 0.75rem;
   }
 }

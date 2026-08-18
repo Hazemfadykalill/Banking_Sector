@@ -1,9 +1,11 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
+import { Component, ChangeDetectionStrategy, input, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { TagModule } from 'primeng/tag';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { Account, Transaction } from '../../../core/models';
+import { LanguageService } from '../../../core/services/language.service';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 export interface MonthAnalytics {
   monthKey: string; // YYYY-MM
@@ -27,13 +29,16 @@ export interface CategorySpend {
     CommonModule,
     TableModule,
     TagModule,
-    ProgressBarModule
+    ProgressBarModule,
+    TranslatePipe
   ],
   templateUrl: './monthly-insights.component.html',
   styleUrls: ['./monthly-insights.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MonthlyInsightsComponent {
+  private readonly langService = inject(LanguageService);
+
   readonly transactions = input<Transaction[]>([]);
   readonly selectedAccount = input<Account | null>(null);
 
@@ -43,6 +48,8 @@ export class MonthlyInsightsComponent {
       return [];
     }
 
+    const lang = this.langService.currentLang();
+    const locale = lang === 'ar' ? 'ar-EG' : 'en-US';
     const map = new Map<string, MonthAnalytics>();
 
     for (const tx of txs) {
@@ -53,7 +60,7 @@ export class MonthlyInsightsComponent {
       const monthStr = String(d.getMonth() + 1).padStart(2, '0');
       const key = `${year}-${monthStr}`;
 
-      const monthName = d.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+      const monthName = d.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
 
       if (!map.has(key)) {
         map.set(key, {
@@ -78,7 +85,6 @@ export class MonthlyInsightsComponent {
       entry.netCashFlow = Number((entry.totalCredits - entry.totalDebits).toFixed(2));
     }
 
-    // Return sorted descending by monthKey (most recent month first)
     return Array.from(map.values()).sort((a, b) => b.monthKey.localeCompare(a.monthKey));
   });
 
