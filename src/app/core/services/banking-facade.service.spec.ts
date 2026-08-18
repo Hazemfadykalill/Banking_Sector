@@ -15,7 +15,7 @@ describe('BankingFacadeService', () => {
     { id: 'a1', customerId: 'c1', iban: '12345', type: 'Current', balance: 1000, currency: 'EGP', status: 'Active', createdAt: '' }
   ];
   const mockTransactions: Transaction[] = [
-    { id: 't1', accountId: 'a1', type: 'Credit', amount: 500, date: '2026-08-01', merchant: 'Salary', category: 'Salary', balanceAfter: 1000 }
+    { id: 't1', accountId: 'a1', type: 'Credit', amount: 500, date: '2026-08-01', merchant: 'Salary', category: 'Income', balanceAfter: 1000 }
   ];
 
   beforeEach(() => {

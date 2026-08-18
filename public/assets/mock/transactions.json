@@ -6,7 +6,7 @@
     "amount": 4500.00,
     "date": "2026-08-01T09:00:00Z",
     "merchant": "Acme Corp Salary",
-    "category": "Salary",
+    "category": "Income",
     "balanceAfter": 15000.00,
     "description": "Monthly Payroll Direct Deposit"
   },
@@ -28,7 +28,7 @@
     "amount": 95.50,
     "date": "2026-08-05T18:40:00Z",
     "merchant": "Electric Utility Co",
-    "category": "Utilities",
+    "category": "Bills",
     "balanceAfter": 14761.70,
     "description": "Monthly electricity bill"
   },
@@ -61,7 +61,7 @@
     "amount": 3200.00,
     "date": "2026-08-01T08:30:00Z",
     "merchant": "TechConsultants Inc",
-    "category": "Salary",
+    "category": "Income",
     "balanceAfter": 8750.00,
     "description": "Bi-weekly consulting payout"
   },
@@ -72,7 +72,7 @@
     "amount": 550.00,
     "date": "2026-08-07T19:00:00Z",
     "merchant": "The French Bistro",
-    "category": "Dining",
+    "category": "Entertainment",
     "balanceAfter": 8200.00,
     "description": "Team dinner celebration"
   },
