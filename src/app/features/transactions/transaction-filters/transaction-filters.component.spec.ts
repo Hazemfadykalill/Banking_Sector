@@ -23,8 +23,8 @@ describe('TransactionFiltersComponent', () => {
 
     fixture = TestBed.createComponent(TransactionFiltersComponent);
     component = fixture.componentInstance;
-    component.categories = mockCategories;
-    component.types = mockTypes;
+    fixture.componentRef.setInput('categories', mockCategories);
+    fixture.componentRef.setInput('types', mockTypes);
     fixture.detectChanges();
   });
 

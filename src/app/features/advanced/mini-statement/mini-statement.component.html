@@ -4,24 +4,24 @@
       <i class="pi pi-history header-icon"></i>
       <h3>Mini Statement</h3>
     </div>
-    @if (selectedAccount) {
-      <span class="acc-badge">{{ selectedAccount.iban }}</span>
+    @if (selectedAccount()) {
+      <span class="acc-badge">{{ selectedAccount()?.iban }}</span>
     }
   </div>
 
-  @if (!selectedAccount) {
+  @if (!selectedAccount()) {
     <div class="empty-state">
       <i class="pi pi-wallet"></i>
       <p>No account selected. Select an account to view mini statement.</p>
     </div>
-  } @else if (recentTransactions.length === 0) {
+  } @else if (recentTransactions().length === 0) {
     <div class="empty-state">
       <i class="pi pi-inbox"></i>
       <p>No recent transactions recorded for this account.</p>
     </div>
   } @else {
     <div class="recent-tx-list">
-      @for (tx of recentTransactions; track tx.id) {
+      @for (tx of recentTransactions(); track tx.id) {
         <div class="tx-row">
           <div class="tx-left">
             <div class="type-icon-box" [class.credit]="tx.type === 'Credit'" [class.debit]="tx.type === 'Debit'">

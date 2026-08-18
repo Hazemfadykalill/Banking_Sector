@@ -4,12 +4,12 @@
       <i class="pi pi-chart-bar header-icon"></i>
       <h3>Monthly Financial Insights</h3>
     </div>
-    @if (selectedAccount) {
-      <span class="acc-chip">{{ selectedAccount.iban }}</span>
+    @if (selectedAccount()) {
+      <span class="acc-chip">{{ selectedAccount()?.iban }}</span>
     }
   </div>
 
-  @if (!selectedAccount || transactions.length === 0) {
+  @if (!selectedAccount() || transactions().length === 0) {
     <div class="empty-insights">
       <i class="pi pi-chart-line"></i>
       <p>No transaction data available to compute monthly insights.</p>
@@ -19,20 +19,20 @@
     <div class="kpi-grid">
       <div class="kpi-card green">
         <span class="kpi-label">Total Inflow (Credits)</span>
-        <strong class="kpi-val">+{{ totalCreditsAllTime | currency:'USD':'symbol':'1.2-2' }}</strong>
+        <strong class="kpi-val">+{{ totalCreditsAllTime() | currency:'USD':'symbol':'1.2-2' }}</strong>
       </div>
 
       <div class="kpi-card red">
         <span class="kpi-label">Total Outflow (Debits)</span>
-        <strong class="kpi-val">-{{ totalDebitsAllTime | currency:'USD':'symbol':'1.2-2' }}</strong>
+        <strong class="kpi-val">-{{ totalDebitsAllTime() | currency:'USD':'symbol':'1.2-2' }}</strong>
       </div>
 
-      <div class="kpi-card" [class.positive]="netCashFlowAllTime >= 0" [class.negative]="netCashFlowAllTime < 0">
+      <div class="kpi-card" [class.positive]="netCashFlowAllTime() >= 0" [class.negative]="netCashFlowAllTime() < 0">
         <span class="kpi-label">Net Cash Flow</span>
-        <strong class="kpi-val">{{ netCashFlowAllTime >= 0 ? '+' : '' }}{{ netCashFlowAllTime | currency:'USD':'symbol':'1.2-2' }}</strong>
+        <strong class="kpi-val">{{ netCashFlowAllTime() >= 0 ? '+' : '' }}{{ netCashFlowAllTime() | currency:'USD':'symbol':'1.2-2' }}</strong>
       </div>
 
-      @if (topSpendingCategory; as topCat) {
+      @if (topSpendingCategory(); as topCat) {
         <div class="kpi-card purple">
           <span class="kpi-label">Top Spending Category</span>
           <strong class="kpi-val">{{ topCat.category }} ({{ topCat.percentage }}%)</strong>
@@ -41,11 +41,11 @@
     </div>
 
     <!-- Category Spending Distribution -->
-    @if (categorySpends.length > 0) {
+    @if (categorySpends().length > 0) {
       <div class="category-breakdown-box">
         <h4>Category Spending Breakdown</h4>
         <div class="cat-progress-list">
-          @for (cat of categorySpends; track cat.category) {
+          @for (cat of categorySpends(); track cat.category) {
             <div class="cat-progress-item">
               <div class="cat-info-row">
                 <span class="cat-name">{{ cat.category }}</span>
@@ -62,7 +62,7 @@
     <div class="monthly-table-wrapper">
       <h4>Monthly Cash Flow Breakdown</h4>
       <p-table
-        [value]="monthlyAnalytics"
+        [value]="monthlyAnalytics()"
         styleClass="p-datatable-sm custom-analytics-table"
         [responsiveLayout]="'scroll'"
       >

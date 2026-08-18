@@ -10,6 +10,8 @@ import {
   CreateTransactionRequest
 } from '../models';
 
+export const SCHEMA_VERSION = 'v2';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -174,10 +176,11 @@ export class BankingFacadeService {
   }
 
   /**
-   * Saves accounts and transactions signals to localStorage.
+   * Saves accounts, transactions, and schema version signals to localStorage.
    */
   private saveStateToStorage(): void {
     try {
+      localStorage.setItem('banking_schema_version', SCHEMA_VERSION);
       localStorage.setItem('banking_accounts', JSON.stringify(this._accounts()));
       localStorage.setItem('banking_transactions', JSON.stringify(this._transactions()));
     } catch (e) {
@@ -186,12 +189,19 @@ export class BankingFacadeService {
   }
 
   /**
-   * Hydrates state from localStorage if valid JSON data exists.
+   * Hydrates state from localStorage if valid JSON data and matching schema version exist.
    */
   private loadStateFromStorage(): { accounts: Account[]; transactions: Transaction[] } | null {
     try {
+      const storedVersion = localStorage.getItem('banking_schema_version');
       const rawAccounts = localStorage.getItem('banking_accounts');
       const rawTransactions = localStorage.getItem('banking_transactions');
+
+      if (!storedVersion || storedVersion !== SCHEMA_VERSION) {
+        console.warn('[BankingFacadeService] Stale or missing schema version in localStorage, falling back to JSON assets.');
+        this.clearStorageState();
+        return null;
+      }
 
       if (rawAccounts && rawTransactions) {
         const accounts = JSON.parse(rawAccounts) as Account[];
@@ -202,9 +212,14 @@ export class BankingFacadeService {
       }
     } catch (e) {
       console.warn('[BankingFacadeService] Invalid localStorage state, falling back to JSON assets:', e);
-      localStorage.removeItem('banking_accounts');
-      localStorage.removeItem('banking_transactions');
+      this.clearStorageState();
     }
     return null;
+  }
+
+  private clearStorageState(): void {
+    localStorage.removeItem('banking_schema_version');
+    localStorage.removeItem('banking_accounts');
+    localStorage.removeItem('banking_transactions');
   }
 }

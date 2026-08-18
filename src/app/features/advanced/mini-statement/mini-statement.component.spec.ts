@@ -33,9 +33,9 @@ describe('MiniStatementComponent', () => {
 
     fixture = TestBed.createComponent(MiniStatementComponent);
     component = fixture.componentInstance;
-    component.selectedAccount = mockAccount;
-    component.transactions = mockTxs;
-    component.limit = 5;
+    fixture.componentRef.setInput('selectedAccount', mockAccount);
+    fixture.componentRef.setInput('transactions', mockTxs);
+    fixture.componentRef.setInput('limit', 5);
     fixture.detectChanges();
   });
 
@@ -44,8 +44,8 @@ describe('MiniStatementComponent', () => {
   });
 
   it('should limit displayed recent transactions to specified limit (5)', () => {
-    expect(component.recentTransactions.length).toBe(5);
-    expect(component.recentTransactions[0].merchant).toBe('M1');
+    expect(component.recentTransactions().length).toBe(5);
+    expect(component.recentTransactions()[0].merchant).toBe('M1');
   });
 
   it('should show empty notice when account is null', () => {

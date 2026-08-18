@@ -30,8 +30,8 @@ describe('MonthlyInsightsComponent', () => {
 
     fixture = TestBed.createComponent(MonthlyInsightsComponent);
     component = fixture.componentInstance;
-    component.selectedAccount = mockAccount;
-    component.transactions = mockTxs;
+    fixture.componentRef.setInput('selectedAccount', mockAccount);
+    fixture.componentRef.setInput('transactions', mockTxs);
     fixture.detectChanges();
   });
 
@@ -40,13 +40,13 @@ describe('MonthlyInsightsComponent', () => {
   });
 
   it('should calculate overall credits, debits, and net cash flow accurately', () => {
-    expect(component.totalCreditsAllTime).toBe(1000);
-    expect(component.totalDebitsAllTime).toBe(500);
-    expect(component.netCashFlowAllTime).toBe(500);
+    expect(component.totalCreditsAllTime()).toBe(1000);
+    expect(component.totalDebitsAllTime()).toBe(500);
+    expect(component.netCashFlowAllTime()).toBe(500);
   });
 
   it('should group transactions into monthly analytics correctly', () => {
-    const analytics = component.monthlyAnalytics;
+    const analytics = component.monthlyAnalytics();
     expect(analytics.length).toBe(2);
     // Most recent month first (February 2026)
     expect(analytics[0].monthKey).toBe('2026-02');
@@ -60,7 +60,7 @@ describe('MonthlyInsightsComponent', () => {
   });
 
   it('should identify top spending category from Debit transactions', () => {
-    const topCat = component.topSpendingCategory;
+    const topCat = component.topSpendingCategory();
     expect(topCat).not.toBeNull();
     expect(topCat?.category).toBe('Groceries');
     expect(topCat?.amount).toBe(300);

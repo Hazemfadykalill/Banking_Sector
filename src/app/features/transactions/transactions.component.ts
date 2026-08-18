@@ -103,12 +103,12 @@ export class TransactionsComponent implements OnInit {
     return result;
   });
 
-  get accountOptions() {
+  readonly accountOptions = computed(() => {
     return this.facade.customerAccounts().map(acc => ({
       label: `${acc.iban} (${acc.type}) - ${acc.balance.toLocaleString('en-US', { style: 'currency', currency: acc.currency })}`,
       value: acc.id
     }));
-  }
+  });
 
   ngOnInit(): void {
     this.facade.loadInitialData();
