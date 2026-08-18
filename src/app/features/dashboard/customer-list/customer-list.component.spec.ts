@@ -7,8 +7,8 @@ describe('CustomerListComponent', () => {
   let fixture: ComponentFixture<CustomerListComponent>;
 
   const mockCustomers: Customer[] = [
-    { id: 'c1', name: 'Sarah Jenkins', email: 'sarah@example.com', tier: 'Premium VIP' },
-    { id: 'c2', name: 'Marcus Vance', email: 'marcus@example.com', tier: 'Platinum' }
+    { CIF: 'c1', name: 'Ahmed Ali', nationalId: '29810251234567', segment: 'Retail', email: 'ahmed@example.com', phone: '+20100000000' },
+    { CIF: 'c2', name: 'Mona Hassan', nationalId: '29004151234568', segment: 'Priority', email: 'mona@example.com', phone: '+20110000000' }
   ];
 
   beforeEach(async () => {
@@ -30,15 +30,15 @@ describe('CustomerListComponent', () => {
   it('should render customer list items', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.querySelectorAll('.customer-card-item').length).toBe(2);
-    expect(compiled.textContent).toContain('Sarah Jenkins');
-    expect(compiled.textContent).toContain('Marcus Vance');
+    expect(compiled.textContent).toContain('Ahmed Ali');
+    expect(compiled.textContent).toContain('Mona Hassan');
   });
 
   it('should highlight selected customer item', () => {
     const compiled = fixture.nativeElement as HTMLElement;
     const selectedItem = compiled.querySelector('.customer-card-item.selected');
     expect(selectedItem).not.toBeNull();
-    expect(selectedItem?.textContent).toContain('Sarah Jenkins');
+    expect(selectedItem?.textContent).toContain('Ahmed Ali');
   });
 
   it('should emit customerSelect event on item click', () => {

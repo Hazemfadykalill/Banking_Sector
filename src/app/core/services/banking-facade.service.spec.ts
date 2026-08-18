@@ -9,10 +9,10 @@ describe('BankingFacadeService', () => {
   let dataServiceSpy: jasmine.SpyObj<BankingDataService>;
 
   const mockCustomers: Customer[] = [
-    { id: 'c1', name: 'John Doe', email: 'john@example.com' }
+    { CIF: 'c1', name: 'John Doe', nationalId: '29810251234567', segment: 'Retail', email: 'john@example.com', phone: '+20100000000' }
   ];
   const mockAccounts: Account[] = [
-    { id: 'a1', customerId: 'c1', accountNumber: '12345', accountType: 'Checking', balance: 1000, currency: 'USD', status: 'Active', createdAt: '' }
+    { id: 'a1', customerId: 'c1', iban: '12345', type: 'Current', balance: 1000, currency: 'EGP', status: 'Active', createdAt: '' }
   ];
   const mockTransactions: Transaction[] = [
     { id: 't1', accountId: 'a1', type: 'Credit', amount: 500, date: '2026-08-01', merchant: 'Salary', category: 'Salary', balanceAfter: 1000 }
@@ -68,7 +68,12 @@ describe('BankingFacadeService', () => {
     expect(result.error).toContain('exceeds current account balance');
   });
 
-  it('should update state and balance after valid transaction', () => {
+  afterEach(() => {
+    localStorage.removeItem('banking_accounts');
+    localStorage.removeItem('banking_transactions');
+  });
+
+  it('should update state and balance after valid transaction and persist to localStorage', () => {
     service.loadInitialData();
 
     const result = service.addTransaction({
@@ -83,5 +88,36 @@ describe('BankingFacadeService', () => {
     expect(result.success).toBeTrue();
     expect(service.selectedAccount()?.balance).toBe(800);
     expect(service.transactions().length).toBe(2);
+
+    expect(localStorage.getItem('banking_accounts')).not.toBeNull();
+    expect(localStorage.getItem('banking_transactions')).not.toBeNull();
+  });
+
+  it('should hydrate accounts and transactions from localStorage on loadInitialData if present', () => {
+    const savedAccounts: Account[] = [
+      { id: 'a1', customerId: 'c1', iban: '12345', type: 'Current', balance: 500, currency: 'EGP', status: 'Active' }
+    ];
+    const savedTransactions: Transaction[] = [
+      { id: 't-saved', accountId: 'a1', type: 'Debit', amount: 500, date: '2026-08-17', merchant: 'Saved Tx', category: 'Shopping', balanceAfter: 500 }
+    ];
+
+    localStorage.setItem('banking_accounts', JSON.stringify(savedAccounts));
+    localStorage.setItem('banking_transactions', JSON.stringify(savedTransactions));
+
+    service.loadInitialData();
+
+    expect(service.accounts()).toEqual(savedAccounts);
+    expect(service.transactions()).toEqual(savedTransactions);
+    expect(service.selectedAccount()?.balance).toBe(500);
+  });
+
+  it('should fall back to JSON load if localStorage contains invalid JSON', () => {
+    localStorage.setItem('banking_accounts', 'INVALID_JSON{{{');
+    localStorage.setItem('banking_transactions', 'INVALID_JSON{{{');
+
+    service.loadInitialData();
+
+    expect(service.accounts()).toEqual(mockAccounts);
+    expect(service.transactions()).toEqual(mockTransactions);
   });
 });

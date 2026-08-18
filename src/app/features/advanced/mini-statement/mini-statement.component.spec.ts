@@ -9,10 +9,10 @@ describe('MiniStatementComponent', () => {
   const mockAccount: Account = {
     id: 'a1',
     customerId: 'c1',
-    accountNumber: 'CHK-101',
-    accountType: 'Checking',
+    iban: 'EG380019000000000123456789',
+    type: 'Current',
     balance: 1000,
-    currency: 'USD',
+    currency: 'EGP',
     status: 'Active',
     createdAt: ''
   };

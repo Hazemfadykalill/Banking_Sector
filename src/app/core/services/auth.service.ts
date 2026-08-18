@@ -12,25 +12,28 @@ export class AuthService {
   // Registered mock customer directory for demo authentication
   private readonly mockCustomers: Customer[] = [
     {
-      id: 'cust-001',
-      name: 'Sarah Jenkins',
-      email: 'sarah.jenkins@example.com',
-      phone: '+1 (555) 234-5678',
-      tier: 'Premium VIP'
+      CIF: 'C001',
+      name: 'Ahmed Ali',
+      nationalId: '29810251234567',
+      segment: 'Retail',
+      email: 'ahmed.ali@mail.com',
+      phone: '+201001234567'
     },
     {
-      id: 'cust-002',
-      name: 'Marcus Vance',
-      email: 'marcus.vance@example.com',
-      phone: '+1 (555) 876-5432',
-      tier: 'Platinum'
+      CIF: 'C002',
+      name: 'Mona Hassan',
+      nationalId: '29004151234568',
+      segment: 'Priority',
+      email: 'mona.hassan@mail.com',
+      phone: '+201112345678'
     },
     {
-      id: 'cust-003',
+      CIF: 'C003',
       name: 'Elena Rostova',
-      email: 'elena.rostova@example.com',
-      phone: '+1 (555) 432-1098',
-      tier: 'Standard'
+      nationalId: '29508121234569',
+      segment: 'Business',
+      email: 'elena.rostova@mail.com',
+      phone: '+201223456789'
     }
   ];
 
@@ -64,10 +67,12 @@ export class AuthService {
       const nameFromEmail = trimmedEmail.split('@')[0].replace('.', ' ');
       const formattedName = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
       matchedCustomer = {
-        id: `cust-${Date.now()}`,
+        CIF: `C${Date.now().toString().slice(-3)}`,
         name: formattedName || 'Portal User',
+        nationalId: '29900000000000',
+        segment: 'Retail',
         email: trimmedEmail,
-        tier: 'Standard'
+        phone: '+201000000000'
       };
     }
 

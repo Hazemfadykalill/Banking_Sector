@@ -16,7 +16,6 @@ import { Transaction } from '../../../core/models';
 export class TransactionListComponent {
   @Input({ required: true }) transactions: Transaction[] = [];
   @Input() isFiltered: boolean = false;
-  @Input() rowsPerPage: number = 10;
 
   getTypeSeverity(type: string): 'success' | 'warn' | 'info' {
     return type === 'Credit' ? 'success' : 'warn';

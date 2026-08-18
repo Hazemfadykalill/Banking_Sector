@@ -29,11 +29,11 @@ export class CustomerListComponent {
     }
   }
 
-  getTierSeverity(tier?: string): 'success' | 'info' | 'warn' | 'secondary' {
-    switch (tier?.toLowerCase()) {
-      case 'premium vip': return 'warn';
-      case 'platinum': return 'info';
-      case 'standard': return 'secondary';
+  getSegmentSeverity(segment?: string): 'success' | 'info' | 'warn' | 'secondary' {
+    switch (segment?.toLowerCase()) {
+      case 'priority': return 'warn';
+      case 'business': return 'success';
+      case 'retail': return 'info';
       default: return 'secondary';
     }
   }

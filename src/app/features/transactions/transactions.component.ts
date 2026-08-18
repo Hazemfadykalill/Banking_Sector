@@ -105,7 +105,7 @@ export class TransactionsComponent implements OnInit {
 
   get accountOptions() {
     return this.facade.customerAccounts().map(acc => ({
-      label: `${acc.accountNumber} (${acc.accountType}) - ${acc.balance.toLocaleString('en-US', { style: 'currency', currency: acc.currency })}`,
+      label: `${acc.iban} (${acc.type}) - ${acc.balance.toLocaleString('en-US', { style: 'currency', currency: acc.currency })}`,
       value: acc.id
     }));
   }
