@@ -91,7 +91,31 @@ Fluid responsive UI ensuring seamless usability across desktop, tablet, and mobi
 - **Mini Statement**: Concise recent ledger summary showing the latest 5 transactions for the selected account.
 - **Monthly Analytics**: Groups transactions by calendar month (`YYYY-MM`) calculating Total Credits, Total Debits, Net Cash Flow, and transaction counts.
 - **Spending Category Analysis**: Automatically derives top spending categories from Debit transactions with progress percentage indicators.
-- **RFC 4180 CSV Export**: Generates and downloads RFC 4180 compliant CSV files (`transactions-{accountNumber}-{date}.csv`) with proper quote/comma escaping and Blob resource cleanup.
+- **RFC 4180 CSV Export**: Generates and downloads RFC 4180 compliant CSV files (`transactions-{accountNumber}-{date}.csv`) with proper quote/comma escaping, formula injection protection, and Blob resource cleanup.
+
+---
+
+## ⚡ Recent Improvements
+
+### 📐 Schema & Data Alignment
+- **Domain Models & Mock Assets**: Aligned Customer and Account models and static JSON mock data with specification requirements (`CIF`, `nationalId`, `segment`, `iban`, and `EGP` currency).
+
+### 💾 State Persistence & Safety
+- **localStorage Synchronization**: Customer accounts and transaction state persist seamlessly across page reloads.
+- **Schema Version Safeguard**: Added a `SCHEMA_VERSION` safeguard (`v2`) in `BankingFacadeService` to automatically invalidate stale or mismatched `localStorage` data and fall back cleanly to fresh JSON assets.
+
+### 🛡️ Data Integrity & Security
+- **Collision-Free UUIDs**: Migrated transaction ID generation to `crypto.randomUUID()` instead of timestamp-based IDs to prevent ID collisions.
+- **CSV Formula Injection Defense**: Enhanced `csv-exporter` to prefix leading formula injection trigger characters (`=`, `+`, `-`, `@`, `\t`, `\r`) with a single quote (`'`), neutralizing spreadsheet formula injection while maintaining RFC 4180 compliance.
+
+### ⚡ Performance & Optimization
+- **Virtual Scrolling**: Implemented PrimeNG virtual scrolling (`virtualScroll`) on the transaction list component for high-performance rendering of large transaction datasets.
+- **Signal Memoization**: Converted component getters to Angular `computed()` signals and `input()` signal inputs across monthly insights, mini statement, transaction filters, and account options to eliminate redundant re-evaluations on change detection.
+- **Bundle Budget Tuning**: Adjusted production build warning threshold to `750kB` in `angular.json` after confirming lazy-loading and module imports were already optimized.
+
+### 🧹 Code Quality & Standardization
+- **Unused Import Cleanup**: Pruned confirmed-unused PrimeNG module imports (`CardModule`, `ButtonModule`, `DividerModule`, `TagModule`) across presentation components.
+- **Unified Currency Formatting**: Standardized currency display to `EGP` across the portal for consistency with account currency data.
 
 ---
 
@@ -181,15 +205,15 @@ npx ng test --watch=false --browsers ChromeHeadless
 ```
 
 ### Test Coverage Summary
-- **Total Executed Specs:** `65`
-- **Status:** `65 SUCCESS / 0 FAILURES`
+- **Total Executed Specs:** `69`
+- **Status:** `69 SUCCESS / 0 FAILURES`
 
 #### Key Areas Tested:
-- **Services & Data Layer**: JSON caching, static dataset loading, optimistic transaction creation, balance updates.
+- **Services & Data Layer**: JSON caching, static dataset loading, optimistic transaction creation, balance updates, schema version fallback.
 - **Guards & AuthService**: Protected route redirection, returnUrl preservation, authenticated session state.
 - **Form & Custom Validation**: Required fields, numeric bounds, maximum 2 decimal places, future date rejection, whitespace rejection, debit amount vs. balance cross-field rules.
 - **Transactions & Filtering**: Multi-criteria filtering (date range, type, category, search), sorting by date/amount, pagination state integrity.
-- **Advanced Features**: RFC 4180 CSV cell escaping, Blob file generation, monthly cash flow aggregation, top spending category derivation.
+- **Advanced Features**: RFC 4180 CSV cell escaping, formula injection protection, Blob file generation, monthly cash flow aggregation, top spending category derivation.
 
 ---
 
@@ -246,21 +270,21 @@ npm run build
 
 ### Build Artifacts Overview
 - **Lazy Chunks:**
-  - `transactions-component`: `74.60 kB`
-  - `login-component`: `31.11 kB`
-  - `advanced-component`: `25.26 kB`
-  - `dashboard-component`: `23.31 kB`
-- **Initial Total Raw Size:** `656.78 kB` (`153.04 kB` estimated transfer size).
+  - `transactions-component`: `74.41 kB`
+  - `login-component`: `31.13 kB`
+  - `advanced-component`: `25.29 kB`
+  - `dashboard-component`: `22.90 kB`
+- **Initial Total Raw Size:** `658.12 kB` (`153.28 kB` estimated transfer size).
 
-> [!WARNING]  
-> **Bundle Budget Warning Notice**  
-> The initial build output displays a budget warning (`656.78 kB` vs `500.00 kB` default warning budget). This is caused by the inclusion of PrimeNG 19 core theme styles (`@primeng/themes/aura`) and `primeicons` webfont assets in the vendor bundle. All feature modules remain strictly lazy-loaded.
+> [!NOTE]  
+> **Bundle Budget Threshold**  
+> The initial build output warning threshold (`maximumWarning`) is set to `750kB` in `angular.json` to accommodate PrimeNG 19 core theme styles (`@primeng/themes/aura`) and `primeicons` webfont assets while keeping all feature modules 100% lazy-loaded.
 
 ---
 
 ## ⚖️ Limitations & Technical Scope
 
-- **Mock Backend**: Data persistence occurs in-memory and via `localStorage`. Reloading the browser resets modified transaction records to initial static JSON mock baselines.
+- **Client-Side Data Layer**: Data persistence occurs client-side via in-memory Signal state and `localStorage` synchronized with schema versioning.
 - **Client-Side Authorization**: Authentication is simulated client-side for assessment evaluation without an external OAuth2/OIDC provider.
 
 ---
