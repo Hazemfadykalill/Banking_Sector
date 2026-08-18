@@ -137,7 +137,7 @@ export class BankingFacadeService {
       : Number((currentAccount.balance + req.amount).toFixed(2));
 
     const newTx: Transaction = {
-      id: `tx-${Date.now()}`,
+      id: `tx-${crypto.randomUUID()}`,
       accountId: req.accountId,
       type: req.type,
       amount: req.amount,
