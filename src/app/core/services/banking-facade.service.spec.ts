@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { of } from 'rxjs';
-import { BankingFacadeService } from './banking-facade.service';
+import { BankingFacadeService, SCHEMA_VERSION } from './banking-facade.service';
 import { BankingDataService } from './banking-data.service';
 import { Customer, Account, Transaction } from '../models';
 
@@ -69,6 +69,7 @@ describe('BankingFacadeService', () => {
   });
 
   afterEach(() => {
+    localStorage.removeItem('banking_schema_version');
     localStorage.removeItem('banking_accounts');
     localStorage.removeItem('banking_transactions');
   });
@@ -89,11 +90,12 @@ describe('BankingFacadeService', () => {
     expect(service.selectedAccount()?.balance).toBe(800);
     expect(service.transactions().length).toBe(2);
 
+    expect(localStorage.getItem('banking_schema_version')).toBe(SCHEMA_VERSION);
     expect(localStorage.getItem('banking_accounts')).not.toBeNull();
     expect(localStorage.getItem('banking_transactions')).not.toBeNull();
   });
 
-  it('should hydrate accounts and transactions from localStorage on loadInitialData if present', () => {
+  it('should hydrate accounts and transactions from localStorage on loadInitialData if schema version matches', () => {
     const savedAccounts: Account[] = [
       { id: 'a1', customerId: 'c1', iban: '12345', type: 'Current', balance: 500, currency: 'EGP', status: 'Active' }
     ];
@@ -101,6 +103,7 @@ describe('BankingFacadeService', () => {
       { id: 't-saved', accountId: 'a1', type: 'Debit', amount: 500, date: '2026-08-17', merchant: 'Saved Tx', category: 'Shopping', balanceAfter: 500 }
     ];
 
+    localStorage.setItem('banking_schema_version', SCHEMA_VERSION);
     localStorage.setItem('banking_accounts', JSON.stringify(savedAccounts));
     localStorage.setItem('banking_transactions', JSON.stringify(savedTransactions));
 
@@ -111,7 +114,23 @@ describe('BankingFacadeService', () => {
     expect(service.selectedAccount()?.balance).toBe(500);
   });
 
+  it('should fall back to JSON load if schema version is missing or mismatched', () => {
+    const savedAccounts: Account[] = [
+      { id: 'a1', customerId: 'c1', iban: '12345', type: 'Current', balance: 500, currency: 'EGP', status: 'Active' }
+    ];
+    localStorage.setItem('banking_schema_version', 'v1'); // Outdated version
+    localStorage.setItem('banking_accounts', JSON.stringify(savedAccounts));
+    localStorage.setItem('banking_transactions', JSON.stringify([]));
+
+    service.loadInitialData();
+
+    expect(service.accounts()).toEqual(mockAccounts);
+    expect(service.transactions()).toEqual(mockTransactions);
+    expect(localStorage.getItem('banking_schema_version')).toBeNull();
+  });
+
   it('should fall back to JSON load if localStorage contains invalid JSON', () => {
+    localStorage.setItem('banking_schema_version', SCHEMA_VERSION);
     localStorage.setItem('banking_accounts', 'INVALID_JSON{{{');
     localStorage.setItem('banking_transactions', 'INVALID_JSON{{{');
 

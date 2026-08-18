@@ -60,7 +60,7 @@
       <label for="categoryFilter">Category</label>
       <p-select
         id="categoryFilter"
-        [options]="categoryOptions"
+        [options]="categoryOptions()"
         [(ngModel)]="selectedCategory"
         optionLabel="label"
         optionValue="value"

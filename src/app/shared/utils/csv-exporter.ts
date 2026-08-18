@@ -13,7 +13,13 @@ export function escapeCsvCell(value: string | number | null | undefined): string
     return '""';
   }
 
-  const str = String(value);
+  let str = String(value);
+
+  // Prefix formula trigger characters with a single quote to neutralize injection
+  if (/^[=+\-@\t\r]/.test(str)) {
+    str = `'${str}`;
+  }
+
   // If the value contains quotes, commas, or newlines, wrap in quotes and double internal quotes
   if (str.includes('"') || str.includes(',') || str.includes('\n') || str.includes('\r')) {
     return `"${str.replace(/"/g, '""')}"`;

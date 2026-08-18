@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectionStrategy, OnInit, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
@@ -25,8 +25,8 @@ import { TransactionCategory, TransactionType, TransactionFilter, TransactionTyp
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TransactionFiltersComponent implements OnInit {
-  @Input() categories: TransactionCategory[] = [];
-  @Input() types: TransactionType[] = [];
+  readonly categories = input<TransactionCategory[]>([]);
+  readonly types = input<TransactionType[]>([]);
   @Output() filterChange = new EventEmitter<TransactionFilter>();
   @Output() filterReset = new EventEmitter<void>();
 
@@ -58,12 +58,12 @@ export class TransactionFiltersComponent implements OnInit {
     // Component initialized with defaults
   }
 
-  get categoryOptions() {
+  readonly categoryOptions = computed(() => {
     return [
       { label: 'All Categories', value: 'ALL' },
-      ...this.categories.map(c => ({ label: c.name, value: c.name }))
+      ...this.categories().map(c => ({ label: c.name, value: c.name }))
     ];
-  }
+  });
 
   onFilterUpdate(): void {
     const filter: TransactionFilter = {

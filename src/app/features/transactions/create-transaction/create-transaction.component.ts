@@ -18,7 +18,6 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
-import { TagModule } from 'primeng/tag';
 import { Account, Transaction, TransactionCategory, TransactionType } from '../../../core/models';
 import { BankingFacadeService } from '../../../core/services/banking-facade.service';
 import { noWhitespaceValidator } from '../../../shared/validators/no-whitespace.validator';
@@ -37,8 +36,7 @@ import { maxDecimalsValidator, pastOrTodayDateValidator, debitBalanceValidator }
     InputTextModule,
     TextareaModule,
     ButtonModule,
-    MessageModule,
-    TagModule
+    MessageModule
   ],
   templateUrl: './create-transaction.component.html',
   styleUrls: ['./create-transaction.component.scss'],
