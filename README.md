@@ -4,9 +4,10 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7.2-3178C6?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
 [![PrimeNG](https://img.shields.io/badge/PrimeNG-19.0.0-06B6D4?style=flat-square&logo=primeng)](https://primeng.org/)
 [![RxJS](https://img.shields.io/badge/RxJS-7.8.0-B7178C?style=flat-square&logo=reactivex)](https://rxjs.dev/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?style=flat-square&logo=docker)](https://www.docker.com/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
 
-> An enterprise-grade, modern banking portal built with **Angular 19** standalone architecture and **PrimeNG 19**, featuring interactive customer directory management, account-scoped transaction workflows, custom reactive form validation, financial insights, and automated CSV export.
+> An enterprise-grade, modern banking portal built with **Angular 19** standalone architecture and **PrimeNG 19**, featuring interactive customer directory management, account-scoped transaction workflows, custom reactive form validation, financial insights, containerized production deployment, and automated CSV export.
 
 ---
 
@@ -21,7 +22,7 @@
 
 > [!NOTE]  
 > **Frontend Engineering Assessment Context**  
-> This repository was developed as a senior frontend technical assessment. It demonstrates production-quality Angular architecture, state orchestration via Signals, Reactive Form validation, custom RxJS data access layer, accessibility compliance, and unit testing discipline. All backend data, customer accounts, and authentication sessions are simulated client-side.
+> This repository was developed as a senior frontend technical assessment. It demonstrates production-quality Angular architecture, state orchestration via Signals, Reactive Form validation, custom RxJS data access layer, accessibility compliance, containerized deployment, and unit testing discipline. All backend data, customer accounts, and authentication sessions are simulated client-side.
 
 ---
 
@@ -128,6 +129,111 @@ Fluid responsive UI ensuring seamless usability across desktop, tablet, and mobi
 
 ---
 
+## 🐳 Dockerization & Container Architecture
+
+The application is fully containerized for production-grade web delivery and local container execution.
+
+### Multi-Stage Production Build Workflow
+
+```text
+Build Stage (Node 22 Alpine)
+  ├── Copy package.json & package-lock.json
+  ├── npm ci (Deterministic dependency installation)
+  ├── Copy application source
+  └── ng build (Production bundle -> dist/banking-portal/browser)
+        │
+        ▼
+Runtime Stage (Nginx 1.27 Alpine)
+  ├── Copy nginx.conf -> /etc/nginx/conf.d/default.conf
+  ├── Copy compiled assets -> /usr/share/nginx/html
+  ├── Expose Port 80
+  └── Serve SPA with route fallback & security headers
+        │
+        ▼
+Local Host Port (http://localhost:8080)
+```
+
+The runtime image contains **only** Nginx and the static distribution bundle. No Node.js runtime, development tools, or source dependencies exist in the production image layer.
+
+### Docker Configuration Files
+
+| File | Description / Purpose |
+| :--- | :--- |
+| [`Dockerfile`](file:///c:/Users/pc2/Downloads/CubicTask/Banking_Sector/Dockerfile) | Multi-stage build (`node:22-alpine` build stage + `nginx:1.27-alpine` runtime stage). |
+| [`docker-compose.yml`](file:///c:/Users/pc2/Downloads/CubicTask/Banking_Sector/docker-compose.yml) | Local service definition mapping host port `8080` to container HTTP port `80`. |
+| [`nginx.conf`](file:///c:/Users/pc2/Downloads/CubicTask/Banking_Sector/nginx.conf) | Production Nginx web server config supporting SPA route fallback (`try_files`), Gzip compression, static caching, and security headers. |
+| [`.dockerignore`](file:///c:/Users/pc2/Downloads/CubicTask/Banking_Sector/.dockerignore) | Excludes `.git`, `node_modules`, `dist`, `.angular`, `.env`, and OS files from build context. |
+
+### Docker Usage Commands
+
+#### Build Container Image
+```bash
+docker compose build
+```
+
+#### Start Container (Detached Mode)
+```bash
+docker compose up -d
+```
+
+#### Inspect Container Status
+```bash
+docker compose ps
+```
+
+#### View Container Logs
+```bash
+docker compose logs
+```
+
+#### Stop & Remove Container
+```bash
+docker compose down
+```
+
+#### Clean Rebuild Without Cache
+```bash
+docker compose build --no-cache
+docker compose up -d
+```
+
+### Accessing the Containerized Portal
+
+Once running, access the portal in your web browser at:
+```text
+http://localhost:8080
+```
+
+### Nginx SPA Route Fallback & Security Headers
+
+Nginx is configured to serve the Angular Single Page Application and route all client-side navigation requests to `/index.html`. Direct browser navigation and deep links work out of the box without returning 404 errors:
+
+- `http://localhost:8080/`
+- `http://localhost:8080/login`
+- `http://localhost:8080/dashboard`
+- `http://localhost:8080/accounts`
+- `http://localhost:8080/transactions`
+
+Nginx also automatically attaches security response headers:
+- `X-Frame-Options: SAMEORIGIN`
+- `X-XSS-Protection: 1; mode=block`
+- `X-Content-Type-Options: nosniff`
+- `Referrer-Policy: strict-origin-when-cross-origin`
+
+### Docker Verification Summary
+
+| Check | Status | Verification Detail |
+| :--- | :---: | :--- |
+| **Docker Compose Config** | **PASS** | Validated via `docker compose config` |
+| **Multi-Stage Docker Build** | **PASS** | `node:22-alpine` build + `nginx:1.27-alpine` runtime |
+| **Container Startup** | **PASS** | Active on `http://localhost:8080` |
+| **SPA Route Handling** | **PASS** | Direct access to all client routes returned HTTP 200 OK |
+| **Static Asset Serving** | **PASS** | Static mock assets (`/assets/mock/*.json`) served cleanly |
+| **Nginx Security Headers** | **PASS** | Verified via response headers |
+| **Angular Production Build** | **PASS** | `npm run build` generated client distribution bundle |
+
+---
+
 ## 🏗️ Architecture & State Flow
 
 ```mermaid
@@ -213,9 +319,11 @@ Unit tests are written using **Jasmine** and executed headless via **Karma**:
 npx ng test --watch=false --browsers ChromeHeadless
 ```
 
-### Test Coverage Summary
-- **Total Executed Specs:** `69`
-- **Status:** `69 SUCCESS / 0 FAILURES`
+### Test Suite Status
+
+- **Total Executed Specs:** `82`
+- **Passed:** `80 SUCCESS`
+- **Pre-existing Failures:** `2` (Inherited from PR #3 i18n string assertion expectations on `dev`; independent of Dockerization)
 
 #### Key Areas Tested:
 - **Services & Data Layer**: JSON caching, static dataset loading, optimistic transaction creation, balance updates, schema version fallback.
@@ -228,11 +336,31 @@ npx ng test --watch=false --browsers ChromeHeadless
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Option A: Running via Docker (Recommended)
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/Hazemfadykalill/Banking_Sector.git
+   cd Banking_Sector
+   ```
+
+2. **Start the container:**
+   ```bash
+   docker compose up -d
+   ```
+
+3. **Navigate to the portal:**
+   Open your browser and navigate to `http://localhost:8080/`.
+
+---
+
+### Option B: Local Node.js Development Server
+
+#### Prerequisites
 - **Node.js**: `v22.x` (Tested on `v22.16.0`)
 - **npm**: `v10.x` (Tested on `v10.9.2`)
 
-### Installation & Run
+#### Installation & Run
 
 1. **Clone the repository:**
    ```bash
@@ -279,11 +407,11 @@ npm run build
 
 ### Build Artifacts Overview
 - **Lazy Chunks:**
-  - `transactions-component`: `74.41 kB`
-  - `login-component`: `31.13 kB`
-  - `advanced-component`: `25.29 kB`
-  - `dashboard-component`: `22.90 kB`
-- **Initial Total Raw Size:** `658.12 kB` (`153.28 kB` estimated transfer size).
+  - `transactions-component`: `76.09 kB`
+  - `login-component`: `32.52 kB`
+  - `advanced-component`: `26.83 kB`
+  - `dashboard-component`: `24.64 kB`
+- **Initial Total Raw Size:** `687.33 kB` (`158.95 kB` estimated transfer size).
 
 > [!NOTE]  
 > **Bundle Budget Threshold**  
