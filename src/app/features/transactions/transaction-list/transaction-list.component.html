@@ -1,19 +1,19 @@
 <div class="transaction-list-card">
   <div class="table-header-row">
-    <h3>Transaction Ledger</h3>
-    <span class="count-chip">{{ transactions.length }} Records</span>
+    <h3>{{ 'tx.title' | translate }}</h3>
+    <span class="count-chip">{{ transactions.length }}</span>
   </div>
 
   @if (transactions.length === 0) {
     <div class="empty-state-container">
       @if (isFiltered) {
         <i class="pi pi-filter-slash empty-icon"></i>
-        <h4>No Matching Transactions</h4>
-        <p>No transaction records match the active filter criteria. Try adjusting or clearing your filters.</p>
+        <h4>{{ 'txList.noTxFiltered' | translate }}</h4>
+        <p>{{ 'txList.noTx' | translate }}</p>
       } @else {
         <i class="pi pi-receipt empty-icon"></i>
-        <h4>No Account Transactions</h4>
-        <p>There are no recorded transactions for this selected banking account yet.</p>
+        <h4>{{ 'txList.noTxUnfiltered' | translate }}</h4>
+        <p>{{ 'txList.noTx' | translate }}</p>
       }
     </div>
   } @else {
@@ -29,12 +29,12 @@
       >
         <ng-template pTemplate="header">
           <tr>
-            <th>Date</th>
-            <th>Merchant / Description</th>
-            <th>Category</th>
-            <th>Type</th>
-            <th class="text-right">Amount</th>
-            <th class="text-right">Post Balance</th>
+            <th>{{ 'txList.colDate' | translate }}</th>
+            <th>{{ 'txList.colMerchant' | translate }}</th>
+            <th>{{ 'txList.colCategory' | translate }}</th>
+            <th>{{ 'txList.colType' | translate }}</th>
+            <th class="text-right">{{ 'txList.colAmount' | translate }}</th>
+            <th class="text-right">{{ 'txList.colBalance' | translate }}</th>
           </tr>
         </ng-template>
 
@@ -55,11 +55,11 @@
               </div>
             </td>
             <td>
-              <p-tag [value]="tx.category" [severity]="getCategorySeverity(tx.category)"></p-tag>
+              <p-tag [value]="('cat.' + tx.category) | translate" [severity]="getCategorySeverity(tx.category)"></p-tag>
             </td>
             <td>
               <p-tag
-                [value]="tx.type"
+                [value]="('type.' + tx.type) | translate"
                 [severity]="getTypeSeverity(tx.type)"
                 [icon]="tx.type === 'Credit' ? 'pi pi-arrow-down-left' : 'pi pi-arrow-up-right'"
               ></p-tag>

@@ -1,12 +1,19 @@
 .app-navigation {
-  background: #1e293b;
-  border-bottom: 1px solid #334155;
-  padding: 0 1.5rem;
+  background: var(--nav-bg, #1e293b);
+  border-bottom: 1px solid var(--nav-border, #334155);
+  padding: 0 1.25rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
 .nav-container {
   max-width: 1400px;
   margin: 0 auto;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  scrollbar-width: none;
 }
 
 .nav-list {
@@ -15,10 +22,12 @@
   margin: 0;
   padding: 0;
   gap: 0.5rem;
+  white-space: nowrap;
 }
 
 .nav-item {
   display: flex;
+  flex-shrink: 0;
 }
 
 .nav-link {
@@ -26,7 +35,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 0.85rem 1.25rem;
-  color: #94a3b8;
+  color: var(--text-secondary, #94a3b8);
   text-decoration: none;
   font-weight: 500;
   font-size: 0.9rem;
@@ -34,7 +43,7 @@
   transition: all 0.2s ease;
 
   &:hover {
-    color: #f8fafc;
+    color: var(--text-color, #f8fafc);
     background: rgba(255, 255, 255, 0.04);
   }
 
@@ -43,5 +52,16 @@
     border-bottom-color: #38bdf8;
     background: rgba(56, 189, 248, 0.08);
     font-weight: 600;
+  }
+}
+
+@media (max-width: 640px) {
+  .app-navigation {
+    padding: 0 0.5rem;
+  }
+
+  .nav-link {
+    padding: 0.75rem 0.85rem;
+    font-size: 0.85rem;
   }
 }

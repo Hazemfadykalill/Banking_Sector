@@ -7,6 +7,7 @@ import { BankingFacadeService } from '../../core/services/banking-facade.service
 import { MiniStatementComponent } from './mini-statement/mini-statement.component';
 import { MonthlyInsightsComponent } from './monthly-insights/monthly-insights.component';
 import { formatTransactionCsv, downloadCsvFile } from '../../shared/utils/csv-exporter';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-advanced',
@@ -17,7 +18,8 @@ import { formatTransactionCsv, downloadCsvFile } from '../../shared/utils/csv-ex
     MessageModule,
     SkeletonModule,
     MiniStatementComponent,
-    MonthlyInsightsComponent
+    MonthlyInsightsComponent,
+    TranslatePipe
   ],
   templateUrl: './advanced.component.html',
   styleUrls: ['./advanced.component.scss'],

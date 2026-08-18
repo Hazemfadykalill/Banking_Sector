@@ -6,12 +6,12 @@
     @if (facade.isLoading()) {
       <div class="loading-state">
         <p-progressSpinner strokeWidth="4" ariaLabel="Loading application data"></p-progressSpinner>
-        <p class="loading-text">Loading banking records...</p>
+        <p class="loading-text">{{ 'shell.loading' | translate }}</p>
       </div>
     } @else if (facade.error()) {
       <div class="error-state">
         <p-message severity="error" [text]="facade.error()!"></p-message>
-        <p-button label="Retry Loading" icon="pi pi-refresh" (onClick)="retry()"></p-button>
+        <p-button [label]="'shell.retry' | translate" icon="pi pi-refresh" (onClick)="retry()"></p-button>
       </div>
     } @else {
       <div class="content-container">
@@ -22,7 +22,7 @@
 
   <footer class="app-footer">
     <div class="footer-container">
-      <p>&copy; 2026 Apex Banking Corporation. Enterprise Portal. Confidential & Secure.</p>
+      <p>{{ 'shell.footer' | translate }}</p>
     </div>
   </footer>
 </div>

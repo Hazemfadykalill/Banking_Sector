@@ -1,4 +1,4 @@
-import { Component, inject, ChangeDetectionStrategy, signal } from '@angular/core';
+import { Component, inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
@@ -8,6 +8,9 @@ import { MenuModule } from 'primeng/menu';
 import { MenuItem } from 'primeng/api';
 import { AuthService } from '../../core/services/auth.service';
 import { BankingFacadeService } from '../../core/services/banking-facade.service';
+import { ThemeService } from '../../core/services/theme.service';
+import { LanguageService } from '../../core/services/language.service';
+import { TranslatePipe } from '../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +21,8 @@ import { BankingFacadeService } from '../../core/services/banking-facade.service
     ButtonModule,
     AvatarModule,
     TagModule,
-    MenuModule
+    MenuModule,
+    TranslatePipe
   ],
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
@@ -27,21 +31,15 @@ import { BankingFacadeService } from '../../core/services/banking-facade.service
 export class HeaderComponent {
   readonly authService = inject(AuthService);
   readonly facade = inject(BankingFacadeService);
+  readonly themeService = inject(ThemeService);
+  readonly langService = inject(LanguageService);
 
-  readonly isDarkMode = signal<boolean>(false);
-
-  readonly userMenuItems: MenuItem[] = [
-    { label: 'Profile', icon: 'pi pi-user' },
-    { label: 'Settings', icon: 'pi pi-cog' },
-    { separator: true },
-    { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.authService.logout() }
-  ];
-
-  toggleDarkMode(): void {
-    this.isDarkMode.update(v => !v);
-    const element = document.querySelector('html');
-    if (element) {
-      element.classList.toggle('app-dark');
-    }
+  get userMenuItems(): MenuItem[] {
+    return [
+      { label: this.langService.translate('app.profile'), icon: 'pi pi-user' },
+      { label: this.langService.translate('app.settings'), icon: 'pi pi-cog' },
+      { separator: true },
+      { label: this.langService.translate('app.logout'), icon: 'pi pi-sign-out', command: () => this.authService.logout() }
+    ];
   }
 }

@@ -1,6 +1,6 @@
 .transaction-list-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--surface-border, #e2e8f0);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -16,14 +16,14 @@
     margin: 0;
     font-size: 1.1rem;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--text-color, #0f172a);
   }
 
   .count-chip {
     font-size: 0.8rem;
     font-weight: 600;
-    color: #64748b;
-    background: #f1f5f9;
+    color: var(--text-secondary, #64748b);
+    background: var(--surface-ground, #f1f5f9);
     padding: 0.25rem 0.65rem;
     border-radius: 12px;
   }
@@ -35,22 +35,22 @@
 
 :host ::ng-deep .custom-tx-table {
   .p-datatable-thead > tr > th {
-    background: #f8fafc;
-    color: #475569;
+    background: var(--surface-ground, #f8fafc);
+    color: var(--text-secondary, #475569);
     font-size: 0.82rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     padding: 0.85rem 1rem;
-    border-bottom: 2px solid #e2e8f0;
+    border-bottom: 2px solid var(--surface-border, #e2e8f0);
   }
 
   .p-datatable-tbody > tr {
     td {
       padding: 0.85rem 1rem;
-      border-bottom: 1px solid #f1f5f9;
+      border-bottom: 1px solid var(--surface-border, #f1f5f9);
       font-size: 0.88rem;
-      color: #1e293b;
+      color: var(--text-color, #1e293b);
     }
   }
 
@@ -65,7 +65,7 @@
   display: flex;
   align-items: center;
   gap: 0.4rem;
-  color: #475569;
+  color: var(--text-secondary, #475569);
 
   .date-icon {
     font-size: 0.85rem;
@@ -79,12 +79,12 @@
   gap: 0.15rem;
 
   .merchant-name {
-    color: #0f172a;
+    color: var(--text-color, #0f172a);
   }
 
   .tx-description {
     font-size: 0.78rem;
-    color: #64748b;
+    color: var(--text-secondary, #64748b);
   }
 }
 
@@ -102,13 +102,13 @@
 
 .balance-after-text {
   font-size: 0.85rem;
-  color: #64748b;
+  color: var(--text-secondary, #64748b);
 }
 
 .empty-state-container {
   text-align: center;
   padding: 3rem 1.5rem;
-  color: #64748b;
+  color: var(--text-secondary, #64748b);
 
   .empty-icon {
     font-size: 2.5rem;
@@ -120,7 +120,7 @@
     margin: 0 0 0.5rem 0;
     font-size: 1.1rem;
     font-weight: 700;
-    color: #1e293b;
+    color: var(--text-color, #1e293b);
   }
 
   p {

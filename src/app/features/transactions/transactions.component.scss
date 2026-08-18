@@ -6,8 +6,8 @@
 }
 
 .page-top-header {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--surface-border, #e2e8f0);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   display: flex;
@@ -31,7 +31,7 @@
   .selector-label {
     font-size: 0.8rem;
     font-weight: 700;
-    color: #475569;
+    color: var(--text-secondary, #475569);
     display: flex;
     align-items: center;
     gap: 0.4rem;
@@ -48,7 +48,7 @@
     flex-wrap: wrap;
 
     :host ::ng-deep .account-select-dropdown {
-      min-width: 320px;
+      min-width: 280px;
 
       @media (max-width: 640px) {
         min-width: 100%;
@@ -63,14 +63,14 @@
 
     .balance-tag {
       font-size: 0.92rem;
-      color: #334155;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      color: var(--text-color, #334155);
+      background: var(--surface-ground, #f8fafc);
+      border: 1px solid var(--surface-border, #e2e8f0);
       padding: 0.4rem 0.8rem;
       border-radius: 8px;
 
       strong {
-        color: #0f172a;
+        color: var(--text-color, #0f172a);
       }
     }
   }

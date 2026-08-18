@@ -6,8 +6,8 @@
           <i class="pi pi-building-columns"></i>
         </div>
         <div class="brand-text">
-          <span class="brand-name">APEX</span>
-          <span class="brand-tag">BANKING PORTAL</span>
+          <span class="brand-name">{{ 'app.title' | translate }}</span>
+          <span class="brand-tag">{{ 'app.subtitle' | translate }}</span>
         </div>
       </a>
     </div>
@@ -15,7 +15,7 @@
     <div class="header-actions">
       @if (facade.selectedCustomer(); as customer) {
         <div class="customer-badge">
-          <span class="badge-label">Active Portal User:</span>
+          <span class="badge-label">{{ 'app.activeUser' | translate }}</span>
           <strong class="customer-name">{{ customer.name }}</strong>
           @if (customer.segment) {
             <p-tag [value]="customer.segment" severity="warn"></p-tag>
@@ -23,13 +23,25 @@
         </div>
       }
 
-      <p-button
-        [icon]="isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'"
-        [rounded]="true"
-        [text]="true"
-        [ariaLabel]="'Toggle Dark Mode'"
-        (onClick)="toggleDarkMode()"
-      ></p-button>
+      <div class="toggle-group">
+        <p-button
+          [label]="'app.toggleLang' | translate"
+          [rounded]="true"
+          [text]="true"
+          size="small"
+          [ariaLabel]="'app.switchLangLabel' | translate"
+          (onClick)="langService.toggleLanguage()"
+          styleClass="lang-toggle-btn"
+        ></p-button>
+
+        <p-button
+          [icon]="themeService.isDarkMode() ? 'pi pi-sun' : 'pi pi-moon'"
+          [rounded]="true"
+          [text]="true"
+          [ariaLabel]="'app.toggleDark' | translate"
+          (onClick)="themeService.toggleTheme()"
+        ></p-button>
+      </div>
 
       @if (authService.session(); as session) {
         <div class="user-profile">
@@ -43,7 +55,7 @@
           </div>
           <p-button
             icon="pi pi-sign-out"
-            label="Logout"
+            [label]="'app.logout' | translate"
             severity="secondary"
             [outlined]="true"
             size="small"

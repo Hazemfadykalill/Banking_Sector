@@ -2,15 +2,15 @@
   <div class="section-title-row">
     <div class="title-group">
       <i class="pi pi-credit-card section-icon"></i>
-      <h3>Accounts Overview</h3>
+      <h3>{{ 'accountList.title' | translate }}</h3>
     </div>
-    <span class="account-count">{{ accounts.length }} Accounts</span>
+    <span class="account-count">{{ accounts.length }}</span>
   </div>
 
   @if (accounts.length === 0) {
     <div class="empty-accounts">
       <i class="pi pi-folder-open empty-icon"></i>
-      <p>No banking accounts registered for this customer.</p>
+      <p>{{ 'accountList.noAccounts' | translate }}</p>
     </div>
   } @else {
     <div class="table-container">
@@ -23,11 +23,11 @@
       >
         <ng-template pTemplate="header">
           <tr>
-            <th>IBAN</th>
-            <th>Type</th>
+            <th>{{ 'accountList.iban' | translate }}</th>
+            <th>{{ 'accountList.type' | translate }}</th>
             <th>Status</th>
-            <th class="text-right">Balance</th>
-            <th class="text-center">Action</th>
+            <th class="text-right">{{ 'accountList.balance' | translate }}</th>
+            <th class="text-center">{{ 'accountList.actions' | translate }}</th>
           </tr>
         </ng-template>
 

@@ -5,11 +5,12 @@ import { TagModule } from 'primeng/tag';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { Account } from '../../../core/models';
+import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 
 @Component({
   selector: 'app-account-list',
   standalone: true,
-  imports: [CommonModule, TableModule, TagModule, CardModule, ButtonModule],
+  imports: [CommonModule, TableModule, TagModule, CardModule, ButtonModule, TranslatePipe],
   templateUrl: './account-list.component.html',
   styleUrls: ['./account-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

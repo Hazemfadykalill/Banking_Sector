@@ -6,8 +6,8 @@
 }
 
 .page-header {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--surface-border, #e2e8f0);
   border-radius: 12px;
   padding: 1.25rem 1.5rem;
   display: flex;
@@ -20,20 +20,20 @@
       margin: 0;
       font-size: 1.35rem;
       font-weight: 800;
-      color: #0f172a;
+      color: var(--text-color, #0f172a);
     }
 
     p {
       margin: 0.25rem 0 0 0;
       font-size: 0.85rem;
-      color: #64748b;
+      color: var(--text-secondary, #64748b);
     }
   }
 }
 
 .advanced-grid {
   display: grid;
-  grid-template-columns: 380px 1fr;
+  grid-template-columns: minmax(280px, 380px) 1fr;
   gap: 1.5rem;
   align-items: start;
 

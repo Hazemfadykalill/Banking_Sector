@@ -1,6 +1,6 @@
 .customer-summary-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--surface-card, #ffffff);
+  border: 1px solid var(--surface-border, #e2e8f0);
   border-radius: 12px;
   padding: 1.5rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -9,7 +9,7 @@
 .no-selection {
   text-align: center;
   padding: 3rem 1rem;
-  color: #94a3b8;
+  color: var(--text-secondary, #94a3b8);
 
   i {
     font-size: 2.5rem;
@@ -53,14 +53,14 @@
         margin: 0;
         font-size: 1.3rem;
         font-weight: 800;
-        color: #0f172a;
+        color: var(--text-color, #0f172a);
       }
     }
 
     .customer-id {
       margin: 0.25rem 0 0 0;
       font-size: 0.82rem;
-      color: #64748b;
+      color: var(--text-secondary, #64748b);
     }
   }
 }
@@ -88,7 +88,7 @@
   .detail-label {
     font-size: 0.78rem;
     font-weight: 600;
-    color: #64748b;
+    color: var(--text-secondary, #64748b);
     display: flex;
     align-items: center;
     gap: 0.35rem;
@@ -101,7 +101,7 @@
 
   .detail-value {
     font-size: 0.9rem;
-    color: #1e293b;
+    color: var(--text-color, #1e293b);
     font-weight: 500;
   }
 }
@@ -113,8 +113,8 @@
 }
 
 .metric-card {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--surface-ground, #f8fafc);
+  border: 1px solid var(--surface-border, #e2e8f0);
   border-radius: 10px;
   padding: 1rem;
   display: flex;
@@ -124,7 +124,7 @@
   .metric-title {
     font-size: 0.78rem;
     font-weight: 600;
-    color: #64748b;
+    color: var(--text-secondary, #64748b);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -132,15 +132,15 @@
   .metric-number {
     font-size: 1.35rem;
     font-weight: 800;
-    color: #0f172a;
+    color: var(--text-color, #0f172a);
   }
 
   &.highlight {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(29, 78, 216, 0.1));
-    border-color: rgba(37, 99, 235, 0.2);
+    background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(29, 78, 216, 0.12));
+    border-color: rgba(37, 99, 235, 0.3);
 
     .metric-number {
-      color: #1d4ed8;
+      color: #38bdf8;
     }
   }
 }

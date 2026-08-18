@@ -1,16 +1,16 @@
 <div class="customer-list-wrapper">
   <div class="list-header">
-    <h3>Customer Directory</h3>
-    <span class="customer-count-badge">{{ customers.length }} Registered</span>
+    <h3>{{ 'customerList.title' | translate }}</h3>
+    <span class="customer-count-badge">{{ customers.length }}</span>
   </div>
 
   @if (customers.length === 0) {
     <div class="empty-list-notice">
       <i class="pi pi-users empty-icon"></i>
-      <p>No customers available in directory.</p>
+      <p>{{ 'customerList.noCustomers' | translate }}</p>
     </div>
   } @else {
-    <div class="customers-grid" role="listbox" aria-label="Select Customer">
+    <div class="customers-grid" role="listbox" [attr.aria-label]="'customerList.title' | translate">
       @for (cust of customers; track cust.CIF) {
         <div
           class="customer-card-item"
