@@ -1,12 +1,14 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { CreateTransactionComponent } from './create-transaction.component';
 import { BankingFacadeService } from '../../../core/services/banking-facade.service';
+import { LanguageService } from '../../../core/services/language.service';
 import { Account } from '../../../core/models';
 
 describe('CreateTransactionComponent', () => {
   let component: CreateTransactionComponent;
   let fixture: ComponentFixture<CreateTransactionComponent>;
   let facadeSpy: jasmine.SpyObj<BankingFacadeService>;
+  let langService: LanguageService;
 
   const mockAccount: Account = {
     id: 'a1',
@@ -20,6 +22,7 @@ describe('CreateTransactionComponent', () => {
   };
 
   beforeEach(async () => {
+    localStorage.removeItem('app_lang');
     facadeSpy = jasmine.createSpyObj('BankingFacadeService', ['addTransaction']);
 
     await TestBed.configureTestingModule({
@@ -29,12 +32,20 @@ describe('CreateTransactionComponent', () => {
       ]
     }).compileComponents();
 
+    langService = TestBed.inject(LanguageService);
+    langService.setLanguage('en');
+
     fixture = TestBed.createComponent(CreateTransactionComponent);
     component = fixture.componentInstance;
     component.selectedAccount = mockAccount;
     component.categories = [{ id: '1', name: 'Groceries' }];
     component.types = [{ id: '1', name: 'Debit' }, { id: '2', name: 'Credit' }];
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    langService.setLanguage('en');
+    localStorage.removeItem('app_lang');
   });
 
   it('should create create transaction component', () => {

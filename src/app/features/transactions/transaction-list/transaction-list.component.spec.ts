@@ -1,10 +1,12 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { TransactionListComponent } from './transaction-list.component';
 import { Transaction } from '../../../core/models';
+import { LanguageService } from '../../../core/services/language.service';
 
 describe('TransactionListComponent', () => {
   let component: TransactionListComponent;
   let fixture: ComponentFixture<TransactionListComponent>;
+  let langService: LanguageService;
 
   const mockTxs: Transaction[] = [
     { id: 'tx1', accountId: 'a1', type: 'Debit', amount: 85.5, date: '2026-02-15T10:00:00Z', merchant: 'Supermarket', category: 'Groceries', balanceAfter: 14415.0 },
@@ -12,14 +14,23 @@ describe('TransactionListComponent', () => {
   ];
 
   beforeEach(async () => {
+    localStorage.removeItem('app_lang');
     await TestBed.configureTestingModule({
       imports: [TransactionListComponent]
     }).compileComponents();
+
+    langService = TestBed.inject(LanguageService);
+    langService.setLanguage('en');
 
     fixture = TestBed.createComponent(TransactionListComponent);
     component = fixture.componentInstance;
     component.transactions = mockTxs;
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    langService.setLanguage('en');
+    localStorage.removeItem('app_lang');
   });
 
   it('should create transaction list component', () => {

@@ -1,10 +1,12 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { AccountListComponent } from './account-list.component';
 import { Account } from '../../../core/models';
+import { LanguageService } from '../../../core/services/language.service';
 
 describe('AccountListComponent', () => {
   let component: AccountListComponent;
   let fixture: ComponentFixture<AccountListComponent>;
+  let langService: LanguageService;
 
   const mockAccounts: Account[] = [
     { id: 'a1', customerId: 'c1', iban: 'EG380019000000000123456789', type: 'Current', balance: 14500.5, currency: 'EGP', status: 'Active', createdAt: '' },
@@ -12,15 +14,24 @@ describe('AccountListComponent', () => {
   ];
 
   beforeEach(async () => {
+    localStorage.removeItem('app_lang');
     await TestBed.configureTestingModule({
       imports: [AccountListComponent]
     }).compileComponents();
+
+    langService = TestBed.inject(LanguageService);
+    langService.setLanguage('en');
 
     fixture = TestBed.createComponent(AccountListComponent);
     component = fixture.componentInstance;
     component.accounts = mockAccounts;
     component.selectedAccountId = 'a1';
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    langService.setLanguage('en');
+    localStorage.removeItem('app_lang');
   });
 
   it('should create account list component', () => {

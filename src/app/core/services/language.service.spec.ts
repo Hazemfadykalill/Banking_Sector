@@ -14,6 +14,7 @@ describe('LanguageService', () => {
   });
 
   afterEach(() => {
+    service.setLanguage('en');
     localStorage.removeItem('app_lang');
     document.documentElement.removeAttribute('lang');
     document.documentElement.removeAttribute('dir');

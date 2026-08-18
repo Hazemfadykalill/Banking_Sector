@@ -1,10 +1,12 @@
 import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { MiniStatementComponent } from './mini-statement.component';
 import { Account, Transaction } from '../../../core/models';
+import { LanguageService } from '../../../core/services/language.service';
 
 describe('MiniStatementComponent', () => {
   let component: MiniStatementComponent;
   let fixture: ComponentFixture<MiniStatementComponent>;
+  let langService: LanguageService;
 
   const mockAccount: Account = {
     id: 'a1',
@@ -27,9 +29,13 @@ describe('MiniStatementComponent', () => {
   ];
 
   beforeEach(async () => {
+    localStorage.removeItem('app_lang');
     await TestBed.configureTestingModule({
       imports: [MiniStatementComponent]
     }).compileComponents();
+
+    langService = TestBed.inject(LanguageService);
+    langService.setLanguage('en');
 
     fixture = TestBed.createComponent(MiniStatementComponent);
     component = fixture.componentInstance;
@@ -37,6 +43,11 @@ describe('MiniStatementComponent', () => {
     fixture.componentRef.setInput('transactions', mockTxs);
     fixture.componentRef.setInput('limit', 5);
     fixture.detectChanges();
+  });
+
+  afterEach(() => {
+    langService.setLanguage('en');
+    localStorage.removeItem('app_lang');
   });
 
   it('should create mini statement component', () => {
