@@ -16,7 +16,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 })
 export class TransactionListComponent {
   @Input({ required: true }) transactions: Transaction[] = [];
-  @Input() isFiltered: boolean = false;
+  @Input() isFiltered = false;
 
   getTypeSeverity(type: string): 'success' | 'warn' | 'info' {
     return type === 'Credit' ? 'success' : 'warn';

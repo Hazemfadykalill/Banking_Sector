@@ -8,7 +8,7 @@ import { MessageModule } from 'primeng/message';
 import { TagModule } from 'primeng/tag';
 import { FormsModule } from '@angular/forms';
 import { BankingFacadeService } from '../../core/services/banking-facade.service';
-import { TransactionFilter, Transaction } from '../../core/models';
+import { TransactionFilter } from '../../core/models';
 import { TransactionFiltersComponent } from './transaction-filters/transaction-filters.component';
 import { TransactionListComponent } from './transaction-list/transaction-list.component';
 import { CreateTransactionComponent } from './create-transaction/create-transaction.component';
@@ -136,7 +136,7 @@ export class TransactionsComponent implements OnInit {
     this.isCreateModalOpen.set(false);
   }
 
-  onTransactionCreated(newTx: Transaction): void {
+  onTransactionCreated(): void {
     this.closeCreateModal();
   }
 }

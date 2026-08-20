@@ -111,7 +111,7 @@ describe('HeaderComponent', () => {
   });
 
   it('userMenuItems labels should be built from langService.translate', () => {
-    const items = component.userMenuItems;
+    expect(component.userMenuItems).toBeDefined();
     // translate was called at least for profile, settings, logout keys
     expect(langServiceSpy.translate).toHaveBeenCalledWith('app.profile');
     expect(langServiceSpy.translate).toHaveBeenCalledWith('app.settings');
