@@ -16,6 +16,6 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
 })
 export class CustomerSummaryComponent {
   @Input() customer: Customer | null = null;
-  @Input() accountCount: number = 0;
-  @Input() totalBalance: number = 0;
+  @Input() accountCount = 0;
+  @Input() totalBalance = 0;
 }

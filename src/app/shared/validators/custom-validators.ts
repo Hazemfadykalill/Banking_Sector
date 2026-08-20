@@ -3,7 +3,7 @@ import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 /**
  * Validates that a numeric input does not exceed a maximum number of decimal places.
  */
-export function maxDecimalsValidator(maxDecimals: number = 2): ValidatorFn {
+export function maxDecimalsValidator(maxDecimals = 2): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
     if (control.value === null || control.value === undefined || control.value === '') {
       return null;

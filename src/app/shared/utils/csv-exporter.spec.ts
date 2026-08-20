@@ -96,7 +96,6 @@ describe('CSV Exporter Utility', () => {
   // -------------------------------------------------------------------------
   describe('downloadCsvFile', () => {
     let mockAnchor: HTMLAnchorElement;
-    let createElementSpy: jasmine.Spy;
     let appendChildSpy: jasmine.Spy;
     let removeChildSpy: jasmine.Spy;
     let createObjectUrlSpy: jasmine.Spy;
@@ -109,7 +108,7 @@ describe('CSV Exporter Utility', () => {
       clickSpy = spyOn(mockAnchor, 'click');
 
       // Spy on document.createElement and return our stub only for 'a'
-      createElementSpy = spyOn(document, 'createElement').and.callFake((tagName: string) => {
+      spyOn(document, 'createElement').and.callFake((tagName: string) => {
         if (tagName === 'a') return mockAnchor;
         return document.createElement(tagName);
       });

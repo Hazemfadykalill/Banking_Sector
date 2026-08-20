@@ -1,9 +1,7 @@
 export type SupportedLanguage = 'en' | 'ar';
 export type TextDirection = 'ltr' | 'rtl';
 
-export interface TranslationDictionary {
-  [key: string]: string;
-}
+export type TranslationDictionary = Record<string, string>;
 
 export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
   en: {
