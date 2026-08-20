@@ -1,65 +1,59 @@
 <div class="dashboard-page">
-  <div class="welcome-banner">
-    <div class="banner-text">
-      <h2>{{ 'dashboard.welcome' | translate }}, {{ authService.session()?.customer?.name || ('dashboard.valuedUser' | translate) }}</h2>
+  <div class="dashboard-banner">
+    <div class="banner-content">
+      <h1>{{ 'dashboard.welcome' | translate }}, {{ authService.session()?.customer?.name || ('dashboard.valuedUser' | translate) }}</h1>
       <p>{{ 'dashboard.welcomeSubtitle' | translate }}</p>
     </div>
-    <div class="banner-meta">
-      <span class="system-status"><i class="pi pi-circle-fill online-dot"></i> {{ 'dashboard.liveStatus' | translate }}</span>
+    <div class="banner-status">
+      <span class="system-status"><i class="pi pi-circle-fill online-dot" aria-hidden="true"></i> {{ 'dashboard.liveStatus' | translate }}</span>
     </div>
   </div>
 
-  <!-- Overall System Quick Stat Cards -->
-  <div class="summary-metrics-row">
-    <div class="summary-metric-card">
-      <div class="metric-icon-box blue">
-        <i class="pi pi-users"></i>
+  <div class="metrics-overview-bar">
+    <div class="metric-card">
+      <div class="metric-icon customer-icon">
+        <i class="pi pi-users" aria-hidden="true"></i>
       </div>
-      <div class="metric-details">
+      <div class="metric-body">
         <span class="metric-label">{{ 'dashboard.metricCustomers' | translate }}</span>
-        <strong class="metric-value">{{ facade.customers().length }}</strong>
+        <strong class="metric-val">{{ facade.customers().length }}</strong>
       </div>
     </div>
 
-    <div class="summary-metric-card">
-      <div class="metric-icon-box green">
-        <i class="pi pi-wallet"></i>
+    <div class="metric-card">
+      <div class="metric-icon account-icon">
+        <i class="pi pi-wallet" aria-hidden="true"></i>
       </div>
-      <div class="metric-details">
+      <div class="metric-body">
         <span class="metric-label">{{ 'dashboard.metricAccounts' | translate }}</span>
-        <strong class="metric-value">{{ facade.accounts().length }}</strong>
+        <strong class="metric-val">{{ facade.accounts().length }}</strong>
       </div>
     </div>
 
-    <div class="summary-metric-card">
-      <div class="metric-icon-box purple">
-        <i class="pi pi-building-columns"></i>
+    <div class="metric-card">
+      <div class="metric-icon balance-icon">
+        <i class="pi pi-building-columns" aria-hidden="true"></i>
       </div>
-      <div class="metric-details">
+      <div class="metric-body">
         <span class="metric-label">{{ 'dashboard.metricLiquidity' | translate }}</span>
-        <strong class="metric-value">{{ systemTotalLiquidity() | currency:'USD':'symbol':'1.2-2' }}</strong>
+        <strong class="metric-val">{{ systemTotalLiquidity() | currency:'EGP':'symbol':'1.2-2' }}</strong>
       </div>
     </div>
   </div>
 
   @if (facade.isLoading()) {
-    <div class="dashboard-skeleton-grid">
-      <div class="skeleton-col">
-        <p-skeleton width="100%" height="400px" borderRadius="12px"></p-skeleton>
-      </div>
-      <div class="skeleton-col">
-        <p-skeleton width="100%" height="220px" borderRadius="12px" styleClass="mb-3"></p-skeleton>
-        <p-skeleton width="100%" height="250px" borderRadius="12px"></p-skeleton>
-      </div>
+    <div class="skeleton-grid">
+      <p-skeleton width="100%" height="280px" borderRadius="12px"></p-skeleton>
+      <p-skeleton width="100%" height="280px" borderRadius="12px"></p-skeleton>
     </div>
   } @else if (facade.error()) {
-    <div class="error-banner-wrapper">
+    <div class="error-wrapper">
       <p-message severity="error" [text]="facade.error()!"></p-message>
       <p-button [label]="'dashboard.retry' | translate" icon="pi pi-refresh" (onClick)="onRetry()"></p-button>
     </div>
   } @else {
     <div class="dashboard-main-grid">
-      <div class="grid-left-panel">
+      <div class="grid-column left-col">
         <app-customer-list
           [customers]="facade.customers()"
           [selectedCustomerId]="facade.selectedCustomer()?.CIF || null"
@@ -67,7 +61,7 @@
         ></app-customer-list>
       </div>
 
-      <div class="grid-right-panel">
+      <div class="grid-column right-col">
         <app-customer-summary
           [customer]="facade.selectedCustomer()"
           [accountCount]="facade.customerAccounts().length"

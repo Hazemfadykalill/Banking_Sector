@@ -1,7 +1,7 @@
 <div class="customer-summary-card">
   @if (!customer) {
     <div class="no-selection">
-      <i class="pi pi-user-minus"></i>
+      <i class="pi pi-user-minus" aria-hidden="true"></i>
       <p>{{ 'customerSummary.selectPrompt' | translate }}</p>
     </div>
   } @else {
@@ -30,18 +30,18 @@
 
     <div class="details-grid">
       <div class="detail-item">
-        <span class="detail-label"><i class="pi pi-id-card"></i> National ID</span>
+        <span class="detail-label"><i class="pi pi-id-card" aria-hidden="true"></i> National ID</span>
         <span class="detail-value">{{ customer.nationalId }}</span>
       </div>
 
       <div class="detail-item">
-        <span class="detail-label"><i class="pi pi-envelope"></i> {{ 'customerSummary.email' | translate }}</span>
+        <span class="detail-label"><i class="pi pi-envelope" aria-hidden="true"></i> {{ 'customerSummary.email' | translate }}</span>
         <span class="detail-value">{{ customer.email }}</span>
       </div>
 
       @if (customer.phone) {
         <div class="detail-item">
-          <span class="detail-label"><i class="pi pi-phone"></i> Phone</span>
+          <span class="detail-label"><i class="pi pi-phone" aria-hidden="true"></i> Phone</span>
           <span class="detail-value">{{ customer.phone }}</span>
         </div>
       }

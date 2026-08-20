@@ -1,45 +1,47 @@
 <div class="mini-statement-card">
-  <div class="card-header">
+  <div class="card-header-row">
     <div class="title-group">
-      <i class="pi pi-history header-icon"></i>
-      <h3>{{ 'mini.title' | translate }}</h3>
+      <i class="pi pi-history header-icon" aria-hidden="true"></i>
+      <h2>{{ 'mini.title' | translate }}</h2>
     </div>
-    @if (selectedAccount()) {
-      <span class="acc-badge">{{ selectedAccount()?.iban }}</span>
-    }
+    <span class="subtitle-hint">{{ 'mini.subtitle' | translate }}</span>
   </div>
 
   @if (!selectedAccount()) {
     <div class="empty-state">
-      <i class="pi pi-wallet"></i>
+      <i class="pi pi-wallet" aria-hidden="true"></i>
       <p>{{ 'mini.noAccount' | translate }}</p>
     </div>
-  } @else if (recentTransactions().length === 0) {
+  } @else if (transactions().length === 0) {
     <div class="empty-state">
-      <i class="pi pi-inbox"></i>
+      <i class="pi pi-inbox" aria-hidden="true"></i>
       <p>{{ 'txList.noTx' | translate }}</p>
     </div>
   } @else {
-    <div class="recent-tx-list">
-      @for (tx of recentTransactions(); track tx.id) {
-        <div class="tx-row">
-          <div class="tx-left">
-            <div class="type-icon-box" [class.credit]="tx.type === 'Credit'" [class.debit]="tx.type === 'Debit'">
-              <i [class]="tx.type === 'Credit' ? 'pi pi-arrow-down-left' : 'pi pi-arrow-up-right'"></i>
-            </div>
-            <div class="tx-meta">
-              <strong class="merchant-title">{{ tx.merchant }}</strong>
-              <span class="tx-date-cat">{{ tx.date | date:'shortDate' }} • {{ ('cat.' + tx.category) | translate }}</span>
-            </div>
-          </div>
-
-          <div class="tx-right">
-            <span class="tx-amount" [class.credit-text]="tx.type === 'Credit'" [class.debit-text]="tx.type === 'Debit'">
-              {{ tx.type === 'Credit' ? '+' : '-' }}{{ tx.amount | currency:'USD':'symbol':'1.2-2' }}
-            </span>
-          </div>
-        </div>
-      }
+    <div class="table-wrapper">
+      <p-table [value]="recentTransactions()" styleClass="p-datatable-sm custom-mini-table">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>{{ 'txList.colDate' | translate }}</th>
+            <th>{{ 'txList.colMerchant' | translate }}</th>
+            <th class="text-right">{{ 'txList.colAmount' | translate }}</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-tx>
+          <tr>
+            <td>{{ tx.date | date:'shortDate' }}</td>
+            <td>
+              <div class="merchant-name-box">
+                <i [class]="tx.type === 'Credit' ? 'pi pi-arrow-down-left' : 'pi pi-arrow-up-right'" aria-hidden="true"></i>
+                <span>{{ tx.merchant }}</span>
+              </div>
+            </td>
+            <td class="text-right font-semibold" [class.credit-txt]="tx.type === 'Credit'" [class.debit-txt]="tx.type === 'Debit'">
+              {{ tx.type === 'Credit' ? '+' : '-' }}{{ tx.amount | currency:'EGP':'symbol':'1.2-2' }}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
   }
 </div>
