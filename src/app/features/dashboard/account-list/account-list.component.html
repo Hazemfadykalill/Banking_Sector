@@ -1,15 +1,15 @@
 <div class="account-list-wrapper">
   <div class="section-title-row">
     <div class="title-group">
-      <i class="pi pi-credit-card section-icon"></i>
-      <h3>{{ 'accountList.title' | translate }}</h3>
+      <i class="pi pi-credit-card section-icon" aria-hidden="true"></i>
+      <h2>{{ 'accountList.title' | translate }}</h2>
     </div>
     <span class="account-count">{{ accounts.length }}</span>
   </div>
 
   @if (accounts.length === 0) {
     <div class="empty-accounts">
-      <i class="pi pi-folder-open empty-icon"></i>
+      <i class="pi pi-folder-open empty-icon" aria-hidden="true"></i>
       <p>{{ 'accountList.noAccounts' | translate }}</p>
     </div>
   } @else {
@@ -25,7 +25,7 @@
           <tr>
             <th>{{ 'accountList.iban' | translate }}</th>
             <th>{{ 'accountList.type' | translate }}</th>
-            <th>Status</th>
+            <th>{{ 'accountList.status' | translate }}</th>
             <th class="text-right">{{ 'accountList.balance' | translate }}</th>
             <th class="text-center">{{ 'accountList.actions' | translate }}</th>
           </tr>
@@ -35,7 +35,7 @@
           <tr [class.selected-row]="acc.id === selectedAccountId">
             <td>
               <div class="account-number-cell">
-                <i class="pi pi-wallet account-icon"></i>
+                <i class="pi pi-wallet account-icon" aria-hidden="true"></i>
                 <strong>{{ acc.iban }}</strong>
               </div>
             </td>
@@ -52,7 +52,8 @@
             </td>
             <td class="text-center">
               <p-button
-                [label]="acc.id === selectedAccountId ? 'Selected' : 'Select'"
+                [label]="(acc.id === selectedAccountId ? 'accountList.selected' : 'accountList.select') | translate"
+                [ariaLabel]="((acc.id === selectedAccountId ? 'accountList.selected' : 'accountList.select') | translate) + ' ' + acc.iban"
                 [icon]="acc.id === selectedAccountId ? 'pi pi-check' : 'pi pi-chevron-right'"
                 [severity]="acc.id === selectedAccountId ? 'success' : 'secondary'"
                 [outlined]="acc.id !== selectedAccountId"

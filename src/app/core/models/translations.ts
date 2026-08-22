@@ -79,6 +79,9 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
     'accountList.newTx': 'New Transaction',
     'accountList.noAccounts': 'No banking accounts registered for this customer.',
     'accountList.selectedAcc': 'Selected Account:',
+    'accountList.status': 'Status',
+    'accountList.select': 'Select',
+    'accountList.selected': 'Selected',
 
     // Transactions
     'tx.title': 'Transaction Ledger & Management',
@@ -260,6 +263,9 @@ export const TRANSLATIONS: Record<SupportedLanguage, TranslationDictionary> = {
     'accountList.newTx': 'معاملة جديدة',
     'accountList.noAccounts': 'لا توجد حسابات مصرفية مسجلة لهذا العميل.',
     'accountList.selectedAcc': 'الحساب المحدد:',
+    'accountList.status': 'الحالة',
+    'accountList.select': 'تحديد',
+    'accountList.selected': 'تم التحديد',
 
     // Transactions
     'tx.title': 'دفتر المعاملات والإدارة',

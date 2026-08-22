@@ -1,18 +1,18 @@
 <div class="transaction-list-card">
   <div class="table-header-row">
-    <h3>{{ 'tx.title' | translate }}</h3>
+    <h1>{{ 'tx.title' | translate }}</h1>
     <span class="count-chip">{{ transactions.length }}</span>
   </div>
 
   @if (transactions.length === 0) {
     <div class="empty-state-container">
       @if (isFiltered) {
-        <i class="pi pi-filter-slash empty-icon"></i>
-        <h4>{{ 'txList.noTxFiltered' | translate }}</h4>
+        <i class="pi pi-filter-slash empty-icon" aria-hidden="true"></i>
+        <h3>{{ 'txList.noTxFiltered' | translate }}</h3>
         <p>{{ 'txList.noTx' | translate }}</p>
       } @else {
-        <i class="pi pi-receipt empty-icon"></i>
-        <h4>{{ 'txList.noTxUnfiltered' | translate }}</h4>
+        <i class="pi pi-receipt empty-icon" aria-hidden="true"></i>
+        <h3>{{ 'txList.noTxUnfiltered' | translate }}</h3>
         <p>{{ 'txList.noTx' | translate }}</p>
       }
     </div>
@@ -42,7 +42,7 @@
           <tr>
             <td>
               <div class="date-cell">
-                <i class="pi pi-calendar-times date-icon"></i>
+                <i class="pi pi-calendar-times date-icon" aria-hidden="true"></i>
                 <span>{{ tx.date | date:'mediumDate' }}</span>
               </div>
             </td>
