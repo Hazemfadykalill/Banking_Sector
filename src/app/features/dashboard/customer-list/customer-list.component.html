@@ -1,12 +1,12 @@
 <div class="customer-list-wrapper">
   <div class="list-header">
-    <h3>{{ 'customerList.title' | translate }}</h3>
+    <h2>{{ 'customerList.title' | translate }}</h2>
     <span class="customer-count-badge">{{ customers.length }}</span>
   </div>
 
   @if (customers.length === 0) {
     <div class="empty-list-notice">
-      <i class="pi pi-users empty-icon"></i>
+      <i class="pi pi-users empty-icon" aria-hidden="true"></i>
       <p>{{ 'customerList.noCustomers' | translate }}</p>
     </div>
   } @else {
@@ -42,7 +42,7 @@
 
           @if (cust.CIF === selectedCustomerId) {
             <div class="selected-indicator">
-              <i class="pi pi-check-circle"></i>
+              <i class="pi pi-check-circle" aria-hidden="true"></i>
             </div>
           }
         </div>

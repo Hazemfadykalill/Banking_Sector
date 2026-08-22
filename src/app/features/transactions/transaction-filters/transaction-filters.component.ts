@@ -1,4 +1,4 @@
-import { Component, Output, EventEmitter, ChangeDetectionStrategy, OnInit, input, computed, inject } from '@angular/core';
+import { Component, Output, EventEmitter, ChangeDetectionStrategy, input, computed, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { SelectModule } from 'primeng/select';
@@ -27,7 +27,7 @@ import { TranslatePipe } from '../../../shared/pipes/translate.pipe';
   styleUrls: ['./transaction-filters.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class TransactionFiltersComponent implements OnInit {
+export class TransactionFiltersComponent {
   private readonly langService = inject(LanguageService);
 
   readonly categories = input<TransactionCategory[]>([]);
@@ -37,15 +37,12 @@ export class TransactionFiltersComponent implements OnInit {
 
   startDate: Date | null = null;
   endDate: Date | null = null;
-  selectedType: string = 'ALL';
-  selectedCategory: string = 'ALL';
-  searchQuery: string = '';
+  selectedType = 'ALL';
+  selectedCategory = 'ALL';
+  searchQuery = '';
   sortBy: 'date' | 'amount' = 'date';
   sortOrder: 'asc' | 'desc' = 'desc';
-
-  selectedSortKey: string = 'date-desc';
-
-  ngOnInit(): void {}
+  selectedSortKey = 'date-desc';
 
   readonly typeOptions = computed(() => [
     { label: this.langService.translate('filters.allTypes'), value: 'ALL' },

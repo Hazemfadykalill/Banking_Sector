@@ -1,8 +1,8 @@
 <div class="filters-container">
   <div class="filters-header">
     <div class="header-title">
-      <i class="pi pi-filter"></i>
-      <h4>{{ 'filters.title' | translate }}</h4>
+      <i class="pi pi-filter" aria-hidden="true"></i>
+      <h2>{{ 'filters.title' | translate }}</h2>
     </div>
     <p-button
       [label]="'filters.clear' | translate"
@@ -19,7 +19,7 @@
     <div class="filter-field">
       <label for="startDate">{{ 'filters.startDate' | translate }}</label>
       <p-datePicker
-        id="startDate"
+        inputId="startDate"
         [(ngModel)]="startDate"
         [placeholder]="'filters.startDate' | translate"
         dateFormat="yy-mm-dd"
@@ -32,7 +32,7 @@
     <div class="filter-field">
       <label for="endDate">{{ 'filters.endDate' | translate }}</label>
       <p-datePicker
-        id="endDate"
+        inputId="endDate"
         [(ngModel)]="endDate"
         [placeholder]="'filters.endDate' | translate"
         dateFormat="yy-mm-dd"
@@ -46,7 +46,7 @@
     <div class="filter-field">
       <label for="typeFilter">{{ 'filters.type' | translate }}</label>
       <p-select
-        id="typeFilter"
+        inputId="typeFilter"
         [options]="typeOptions()"
         [(ngModel)]="selectedType"
         optionLabel="label"
@@ -59,7 +59,7 @@
     <div class="filter-field">
       <label for="categoryFilter">{{ 'filters.category' | translate }}</label>
       <p-select
-        id="categoryFilter"
+        inputId="categoryFilter"
         [options]="categoryOptions()"
         [(ngModel)]="selectedCategory"
         optionLabel="label"
@@ -72,7 +72,7 @@
     <div class="filter-field search-field">
       <label for="merchantSearch">{{ 'filters.searchPlaceholder' | translate }}</label>
       <div class="search-input-wrapper">
-        <i class="pi pi-search search-icon"></i>
+        <i class="pi pi-search search-icon" aria-hidden="true"></i>
         <input
           id="merchantSearch"
           type="text"

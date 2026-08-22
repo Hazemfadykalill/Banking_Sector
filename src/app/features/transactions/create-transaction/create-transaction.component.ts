@@ -53,7 +53,7 @@ export class CreateTransactionComponent implements OnChanges {
   @Input() categories: TransactionCategory[] = [];
   @Input() types: TransactionType[] = [];
   @Input() selectedAccount: Account | null = null;
-  @Input() visible: boolean = false;
+  @Input() visible = false;
 
   @Output() visibleChange = new EventEmitter<boolean>();
   @Output() transactionCreated = new EventEmitter<Transaction>();

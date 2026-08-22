@@ -1,12 +1,11 @@
 <div class="transactions-page">
-  <!-- Top Context Header & Account Switcher -->
   <div class="page-top-header">
     <div class="account-selector-box">
-      <label for="accSelect" class="selector-label"><i class="pi pi-credit-card"></i> {{ 'accountList.selectedAcc' | translate }}</label>
+      <label for="accSelect" class="selector-label"><i class="pi pi-credit-card" aria-hidden="true"></i> {{ 'accountList.selectedAcc' | translate }}</label>
       @if (facade.selectedAccount(); as selAcc) {
         <div class="account-picker-row">
           <p-select
-            id="accSelect"
+            inputId="accSelect"
             [options]="accountOptions()"
             [ngModel]="selAcc.id"
             optionLabel="label"
@@ -72,6 +71,6 @@
     [types]="facade.types()"
     [selectedAccount]="facade.selectedAccount()"
     [(visible)]="isCreateModalOpen"
-    (transactionCreated)="onTransactionCreated($event)"
+    (transactionCreated)="onTransactionCreated()"
   ></app-create-transaction>
 </div>
