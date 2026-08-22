@@ -16,7 +16,7 @@
 - **GitHub Repository**: [Hazemfadykalill/Banking_Sector](https://github.com/Hazemfadykalill/Banking_Sector)
 - **README Documentation**: [README.md](README.md)
 - **Feature List & Technical Assumptions**: [FEATURES.pdf](FEATURES.pdf)
-- **Demo Video**: 📹 Demo Video: [link here]
+- **Demo Video**: 📹 Demo Video: [https://drive.google.com/file/d/1-cx7SYMAfLOzHyojdlVo9IXiWooFwBQk/view?usp=sharing]
 
 ---
 
